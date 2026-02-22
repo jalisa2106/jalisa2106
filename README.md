@@ -55,7 +55,7 @@ I am a Computer Science student at **Charusat University** with a passion for bu
 
 | Project | Description | Link |
 | :--- | :--- | :--- |
-| **ARCADE** | A dynamic, role-based access control university hub application. | [View Repository](https://github.com/jalisa2106/arcade) |
+| **ARCADE** | A dynamic, role-based access control university hub application. | [View Repository]([https://github.com/Sp2736/arcade]) |
 | **Crochet Showcase** | A specialized portfolio website designed to feature custom crochet handiwork. | 🏗️ Developing |
 
 ---
@@ -82,7 +82,7 @@ I am a Computer Science student at **Charusat University** with a passion for bu
 ### Connect With Me
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/jalisabanu-malik">
+  <a href="www.linkedin.com/in/jalisa-malik-8b0308333">
     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
   </a>
   <a href="https://instagram.com/jalisamalik_0612">
