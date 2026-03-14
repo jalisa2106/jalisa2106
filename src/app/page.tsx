@@ -1,9 +1,10 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
+import SkillsCloud from "@/components/SkillsCloud";
 import BentoGrid from "@/components/BentoGrid";
 import Contact from "@/components/Contact";
-import { Heart } from "lucide-react";
+import { Heart } from "lucide-react"; 
 
 export default function Home() {
   return (
@@ -13,15 +14,20 @@ export default function Home() {
       <div className="max-w-6xl mx-auto pt-20 px-6 relative z-10 flex-grow">
         <Hero />
         <About />
+        
+        {/* Skills injected here */}
+        <SkillsCloud />
+        
         <BentoGrid />
         <Contact />
       </div>
 
-      {/* Sweet Minimalist Footer */}
-      <div className="mt-24 pb-8 text-center text-foreground/60 flex items-center justify-center gap-2 text-sm font-semibold">
-        <span>Designed & Built by Jalisa Malik</span>
-        <Heart className="w-4 h-4 text-accent fill-accent" />
-      </div>
+      <footer className="relative z-10 py-8 border-t border-[#ffb3c6]/20 bg-card/30 backdrop-blur-sm mt-auto flex items-center justify-center">
+        <p className="text-foreground/60 text-sm flex items-center gap-1.5 font-medium">
+          Designed and developed by Jalisa Malik
+          <Heart className="w-4 h-4 text-accent fill-accent" />
+        </p>
+      </footer>
     </main>
   );
 }

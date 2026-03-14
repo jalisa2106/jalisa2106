@@ -14,7 +14,7 @@ export default function About() {
         className="p-8 md:p-12 rounded-[2.5rem] bg-card/60 backdrop-blur-md border border-[#ffb3c6]/30 shadow-[0_20px_40px_-10px_rgba(255,179,198,0.2)]"
       >
         <div className="flex items-center gap-3 mb-6">
-          <Sparkles className="w-8 h-8 text-accent" />
+          {/* <Sparkles className="w-8 h-8 text-accent" /> */}
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
             About <span className="text-accent">Me</span>
           </h2>
