@@ -2,41 +2,39 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Github, ExternalLink, Shield, Code, Cpu, LayoutTemplate, X, Repeat, Sparkles } from "lucide-react";
+import { Github, ExternalLink, Code, GraduationCap, Map, X, Repeat } from "lucide-react";
 
 const projects = [
   {
-    id: "carexpert",
-    title: "CareXpert",
-    icon: <LayoutTemplate className="w-10 h-10 text-[#d81159]" />,
-    problem: "The healthcare platform lacked a centralized API structure, leading to vulnerable token pipelines and fragmented state.",
-    solution: "Architected a unified Next.js interface and secured the token handling process, establishing a scalable frontend architecture.",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Security Architecture", "PostgreSQL", "Prisma ORM"],
+    id: "arcade",
+    title: "ARCADE Portal",
+    icon: <GraduationCap className="w-10 h-10 text-[#d81159]" />,
+    problem: "Students lacked a centralized digital environment for academic resources, structured career roadmaps, and faculty-approved study materials.",
+    solution: "Collaboratively built a role-based academic portal featuring an approval-queued notes sharing system, visual career roadmaps, and automated skill gap analysis.",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Team Collaboration"],
+    github: "https://github.com/Sp2736/arcade.git",
+    status: "Work in Progress" 
+  },
+  {
+    id: "greece-explorer",
+    title: "Greece Explorer",
+    icon: <Map className="w-10 h-10 text-[#d81159]" />,
+    problem: "For our 3rd-semester practical, we had the freedom to select any project. I chose to build a comprehensive 11-page travel guide to demonstrate core front-end architecture.",
+    solution: "Designed an immersive, interactive destination guide featuring clean, responsive layouts, modern UI/UX principles, and seamless navigation entirely from scratch.",
+    tags: ["HTML5", "CSS3", "JavaScript", "UI/UX Design"],
+    github: "https://github.com/jalisa2106/Greece-Explorer.git",
+    status: "Deployment Left" 
   },
   {
     id: "skeleton-api",
     title: "Skeleton API",
     icon: <Code className="w-10 h-10 text-[#d81159]" />,
-    problem: "Developers needed a faster way to generate mock data and test API endpoints without leaving their current browser tab.",
-    solution: "Developed a lightweight Microsoft Edge sidebar extension that allows instant, out-of-the-blue API testing and data generation.",
-    tags: ["Edge Extension", "JavaScript", "DOM Manipulation", "REST APIs", "Webpack"],
-  },
-  {
-    id: "vdp-research",
-    title: "Vulnerability Research",
-    icon: <Shield className="w-10 h-10 text-[#d81159]" />,
-    problem: "Identifying undocumented security flaws in enterprise-level applications, specifically within Intigriti VDPs.",
-    solution: "Actively engaged in vulnerability hunting, utilizing advanced reconnaissance to map and report critical security flaws.",
-    tags: ["Cybersecurity", "Intigriti", "Bug Bounty", "Reconnaissance", "Burp Suite"],
-  },
-  {
-    id: "algorithms",
-    title: "Algorithmic Architecture",
-    icon: <Cpu className="w-10 h-10 text-[#d81159]" />,
-    problem: "Standard library solutions were inefficient for complex graph processing and dynamic programming challenges.",
-    solution: "Built a highly optimized C++ repository featuring from-scratch implementations of Kruskal's, Prim's, and the Karatsuba algorithm.",
-    tags: ["C++", "Data Structures", "Algorithms", "Memory Optimization"],
-  },
+    problem: "Developers waste valuable time manually writing and maintaining TypeScript interfaces and client code for complex, evolving API responses.",
+    solution: "Built a Microsoft Edge extension functioning as an API Intelligence Tool, instantly auto-generating TypeScript interfaces directly from live responses.",
+    tags: ["Edge Extension", "TypeScript", "API Intelligence", "Automation"],
+    github: "#",
+    status: "Work in Progress" 
+  }
 ];
 
 const ANIMATION_DURATION = 1.5;
@@ -159,24 +157,39 @@ export default function PetalProjects() {
                       </motion.div>
                     </div>
                     
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="flex items-center justify-between pt-6 border-t border-[#ffb3c6]/30">
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="flex flex-col md:flex-row md:items-center justify-between gap-4 pt-6 border-t border-[#ffb3c6]/30">
                       
                       <button 
                         onClick={() => setIsFlipped(true)}
-                        className="flex items-center justify-center px-4 py-2 bg-[#fff0f3] text-accent font-bold rounded-full border border-accent/30 shadow-[0_0_15px_rgba(216,17,89,0.3)] hover:shadow-[0_0_25px_rgba(216,17,89,0.6)] hover:bg-accent hover:text-white transition-all duration-300 text-sm md:text-base"
+                        className="flex items-center justify-center px-4 py-2 bg-[#fff0f3] text-accent font-bold rounded-full border border-accent/30 shadow-[0_0_15px_rgba(216,17,89,0.3)] hover:shadow-[0_0_25px_rgba(216,17,89,0.6)] hover:bg-accent hover:text-white transition-all duration-300 text-sm md:text-base w-full md:w-auto"
                       >
                         View Tech Stack
                       </button>
 
-                      <div className="flex gap-2 md:gap-3">
-                        <a href="#" className="flex items-center justify-center w-10 h-10 md:w-auto md:h-auto md:px-4 md:py-2 bg-foreground text-background font-semibold rounded-full hover:bg-accent hover:text-white transition-colors">
+                      <div className="flex gap-2 md:gap-3 items-center justify-end">
+                        <a href={selectedProject.github} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-10 h-10 md:w-auto md:h-auto md:px-4 md:py-2 bg-foreground text-background font-semibold rounded-full hover:bg-accent hover:text-white transition-colors">
                           <Github className="w-4 h-4" /> 
                           <span className="hidden md:inline ml-2 text-sm">Code</span>
                         </a>
-                        <a href="#" className="flex items-center justify-center w-10 h-10 md:w-auto md:h-auto md:px-4 md:py-2 bg-[#fff0f3] text-accent font-semibold rounded-full border border-[#ffb3c6]/50 hover:bg-accent hover:text-white transition-colors">
-                          <ExternalLink className="w-4 h-4" /> 
-                          <span className="hidden md:inline ml-2 text-sm">Live</span>
-                        </a>
+                        
+                        <div className="flex items-center gap-2">
+                          {selectedProject.status ? (
+                            <>
+                              <span className="text-[10px] md:text-xs font-bold text-accent uppercase tracking-wider bg-[#fff0f3] px-2 py-1 rounded-md border border-accent/20 whitespace-nowrap">
+                                {selectedProject.status}
+                              </span>
+                              <button disabled className="flex items-center justify-center w-10 h-10 md:w-auto md:h-auto md:px-4 md:py-2 bg-[#fff0f3] text-accent font-semibold rounded-full border border-[#ffb3c6]/50 opacity-50 cursor-not-allowed">
+                                <ExternalLink className="w-4 h-4" /> 
+                                <span className="hidden md:inline ml-2 text-sm">Live</span>
+                              </button>
+                            </>
+                          ) : (
+                            <a href={selectedProject.live} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-10 h-10 md:w-auto md:h-auto md:px-4 md:py-2 bg-[#fff0f3] text-accent font-semibold rounded-full border border-[#ffb3c6]/50 hover:bg-accent hover:text-white transition-colors">
+                              <ExternalLink className="w-4 h-4" /> 
+                              <span className="hidden md:inline ml-2 text-sm">Live</span>
+                            </a>
+                          )}
+                        </div>
                       </div>
                       
                     </motion.div>
@@ -221,7 +234,6 @@ export default function PetalProjects() {
                               style={{ left: `${node.x}%`, top: `${node.y}%` }}
                             />
                             
-                            {/* MATH FIX: Guaranteed overlap prevention using CSS calc() and Flexbox Bounding */}
                             <motion.div
                               initial={{ x: node.isRightSide ? -15 : 15, opacity: 0 }}
                               animate={{ x: 0, opacity: isFlipped ? 1 : 0 }}
@@ -229,14 +241,17 @@ export default function PetalProjects() {
                               className={`absolute -translate-y-1/2 flex z-10 ${node.isRightSide ? 'justify-start' : 'justify-end'}`}
                               style={{
                                 top: `${node.y}%`,
-                                // 1.25rem = 20 pixels. The dot radius is only 7 pixels. 
-                                // This mathematically guarantees the text starts outside the dot boundary!
+                                transform: "translateZ(1px)", // FIX: Hardware acceleration for crisp text
                                 ...(node.isRightSide 
                                   ? { left: `calc(${node.x}% + 1.25rem)`, right: "1rem" } 
                                   : { right: `calc(${100 - node.x}% + 1.25rem)`, left: "1rem" })
                               }}
                             >
-                              <span className="text-xs md:text-base font-semibold text-[#fce4ec] bg-[#fce4ec]/10 px-3 py-1.5 md:px-4 md:py-2 rounded-xl border border-accent/30 backdrop-blur-sm shadow-md text-center leading-snug break-words">
+                              {/* FIX: Removed nested backdrop-blur to prevent browser rasterization blur */}
+                              <span 
+                                className="text-xs md:text-base font-semibold text-[#fce4ec] bg-white/5 px-3 py-1.5 md:px-4 md:py-2 rounded-xl border border-accent/30 shadow-md text-center leading-snug break-words"
+                                style={{ WebkitFontSmoothing: "antialiased" }}
+                              >
                                 {node.tag}
                               </span>
                             </motion.div>
