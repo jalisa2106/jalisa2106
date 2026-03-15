@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Github, ExternalLink, Shield, Code, Cpu, LayoutTemplate, X, Repeat } from "lucide-react";
+import { Github, ExternalLink, Shield, Code, Cpu, LayoutTemplate, X, Repeat, Sparkles } from "lucide-react";
 
 const projects = [
   {
@@ -161,7 +161,6 @@ export default function PetalProjects() {
                     
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="flex items-center justify-between pt-6 border-t border-[#ffb3c6]/30">
                       
-                      {/* Cleaned up View Tech Stack Button */}
                       <button 
                         onClick={() => setIsFlipped(true)}
                         className="flex items-center justify-center px-4 py-2 bg-[#fff0f3] text-accent font-bold rounded-full border border-accent/30 shadow-[0_0_15px_rgba(216,17,89,0.3)] hover:shadow-[0_0_25px_rgba(216,17,89,0.6)] hover:bg-accent hover:text-white transition-all duration-300 text-sm md:text-base"
@@ -169,7 +168,6 @@ export default function PetalProjects() {
                         View Tech Stack
                       </button>
 
-                      {/* Responsive Action Buttons (Icons only on mobile) */}
                       <div className="flex gap-2 md:gap-3">
                         <a href="#" className="flex items-center justify-center w-10 h-10 md:w-auto md:h-auto md:px-4 md:py-2 bg-foreground text-background font-semibold rounded-full hover:bg-accent hover:text-white transition-colors">
                           <Github className="w-4 h-4" /> 
@@ -223,17 +221,19 @@ export default function PetalProjects() {
                               style={{ left: `${node.x}%`, top: `${node.y}%` }}
                             />
                             
-                            {/* Replaced truncation with beautiful natural wrapping */}
+                            {/* MATH FIX: Guaranteed overlap prevention using CSS calc() and Flexbox Bounding */}
                             <motion.div
                               initial={{ x: node.isRightSide ? -15 : 15, opacity: 0 }}
                               animate={{ x: 0, opacity: isFlipped ? 1 : 0 }}
                               transition={{ delay: isFlipped ? timeDelay + 0.1 : 0, duration: 0.4 }}
-                              className="absolute -translate-y-1/2 flex z-10 w-[110px] md:w-auto"
+                              className={`absolute -translate-y-1/2 flex z-10 ${node.isRightSide ? 'justify-start' : 'justify-end'}`}
                               style={{
                                 top: `${node.y}%`,
+                                // 1.25rem = 20 pixels. The dot radius is only 7 pixels. 
+                                // This mathematically guarantees the text starts outside the dot boundary!
                                 ...(node.isRightSide 
-                                  ? { left: `${node.x + 4}%`, right: "2%", justifyContent: "flex-start" } 
-                                  : { right: `${100 - node.x + 4}%`, left: "2%", justifyContent: "flex-end" })
+                                  ? { left: `calc(${node.x}% + 1.25rem)`, right: "1rem" } 
+                                  : { right: `calc(${100 - node.x}% + 1.25rem)`, left: "1rem" })
                               }}
                             >
                               <span className="text-xs md:text-base font-semibold text-[#fce4ec] bg-[#fce4ec]/10 px-3 py-1.5 md:px-4 md:py-2 rounded-xl border border-accent/30 backdrop-blur-sm shadow-md text-center leading-snug break-words">

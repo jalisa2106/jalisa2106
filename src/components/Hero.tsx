@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Terminal, ShieldCheck, User, Code2, ChevronRight } from "lucide-react";
+import { Terminal, ShieldCheck, User, Code2, ChevronRight, ChevronDown, Flower2 } from "lucide-react";
 
 export default function Hero() {
   const [isBooting, setIsBooting] = useState(true);
@@ -11,12 +11,21 @@ export default function Hero() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsBooting(false);
-    }, 3500);
+    }, 3000);
     return () => clearTimeout(timer);
   }, []);
 
+  // Smooth scroll handler for the bounce arrow
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    e.preventDefault();
+    const aboutSection = document.getElementById('about');
+    if (aboutSection) {
+      aboutSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section className="relative min-h-[70vh] flex flex-col items-center justify-center pt-10">
+    <section className="relative min-h-[calc(100vh-80px)] flex flex-col items-center justify-center pt-10 pb-20">
       
       <AnimatePresence mode="wait">
         {isBooting ? (
@@ -70,11 +79,10 @@ export default function Hero() {
                 initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.9 }}
                 className="flex items-center gap-3 text-foreground"
               >
-                <ShieldCheck className="w-5 h-5 text-[#6b8e23]" /> {/* Soft Green for success */}
+                <ShieldCheck className="w-5 h-5 text-[#6b8e23]" /> 
                 <span className="text-foreground/60">Security Mode:</span>
                 <span className="font-bold text-[#6b8e23]">Enabled</span>
                 
-                {/* Blinking Cursor */}
                 <motion.div 
                   animate={{ opacity: [1, 0, 1] }} 
                   transition={{ repeat: Infinity, duration: 0.8 }} 
@@ -94,7 +102,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-center z-10 flex flex-col items-center"
+            className="text-center z-10 flex flex-col items-center w-full h-full justify-center"
           >
             <motion.h1 
               className="text-5xl md:text-7xl font-extrabold tracking-tight text-foreground mb-6"
@@ -129,12 +137,44 @@ export default function Hero() {
                 <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
               <a 
-                href="#contact" 
+                href="#about" 
+                onClick={handleScroll}
                 className="px-8 py-4 bg-[#fff0f3] text-foreground font-bold rounded-full border border-[#ffb3c6]/50 hover:border-accent hover:text-accent transition-all duration-300 shadow-sm"
               >
-                Get in Touch
+                About Me
               </a>
             </motion.div>
+
+            {/* ============================== */
+            /* 3. FLORAL SCROLL INDICATOR     */
+            /* ============================== */}
+            {/* FIX: Switched from 'absolute' positioning to a generous 'mt-24' (margin-top). 
+              This forces the indicator to stay below the buttons no matter how short the screen is.
+            */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.5, duration: 1 }}
+              className="mt-24" 
+            >
+              <motion.a 
+                href="#about" 
+                onClick={handleScroll}
+                className="flex flex-col items-center group cursor-pointer"
+                aria-label="Scroll to About section"
+                // The bounce animation is now applied to the entire group
+                animate={{ y: [0, 12, 0] }}
+                transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+              >
+                <Flower2 className="w-5 h-5 text-[#ffb3c6] mb-2 group-hover:text-accent transition-colors duration-300" />
+                <div
+                  className="p-3 bg-card/60 backdrop-blur-md rounded-full border border-[#ffb3c6]/50 shadow-sm group-hover:border-accent group-hover:shadow-[0_0_15px_rgba(216,17,89,0.3)] transition-all duration-300"
+                >
+                  <ChevronDown className="w-5 h-5 text-foreground/60 group-hover:text-accent transition-colors duration-300" />
+                </div>
+              </motion.a>
+            </motion.div>
+
           </motion.div>
         )}
       </AnimatePresence>

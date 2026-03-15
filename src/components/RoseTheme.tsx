@@ -15,62 +15,84 @@ export default function RoseTheme() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    let generation = 0; // Tracks which drawing cycle is active to prevent overlapping animations
 
-    const drawRose = (x: number, y: number, size: number) => {
-      // Soft pink petals with deep maroon outlines so they are visible!
-      ctx.fillStyle = "rgba(255, 179, 198, 0.8)"; 
-      ctx.strokeStyle = "rgba(136, 13, 30, 0.4)"; 
-      ctx.lineWidth = 1.5;
-      
-      for (let i = 0; i < 5; i++) {
-        ctx.beginPath();
-        ctx.arc(x + Math.cos(i) * (size/2), y + Math.sin(i) * (size/2), size, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.stroke();
-      }
-      ctx.beginPath();
-      ctx.arc(x, y, size / 1.5, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(216, 17, 89, 0.6)"; // Darker pink center
-      ctx.fill();
-    };
+    const initVines = () => {
+      generation++;
+      const currentGen = generation;
 
-    const drawVine = (x: number, y: number, angle: number, len: number, width: number) => {
-      if (len < 15) return; 
-      
-      ctx.beginPath();
-      ctx.moveTo(x, y);
-      const nx = x + Math.cos(angle) * len;
-      const ny = y + Math.sin(angle) * len;
-      
-      // Soft sage green for vines
-      ctx.strokeStyle = "rgba(143, 162, 122, 0.5)"; 
-      ctx.lineWidth = width;
-      ctx.lineTo(nx, ny);
-      ctx.stroke();
-
-      if (Math.random() > 0.8) {
-        drawRose(nx, ny, Math.random() * 12 + 6);
-      }
-
-      setTimeout(() => {
-        drawVine(nx, ny, angle + (Math.random() * 0.4 - 0.2), len * 0.85, width * 0.8);
-        if (Math.random() > 0.75) drawVine(nx, ny, angle - 0.6, len * 0.6, width * 0.6);
-        if (Math.random() > 0.75) drawVine(nx, ny, angle + 0.6, len * 0.6, width * 0.6);
-      }, 150);
-    };
-
-    // Grow vines prominently from the sides
-    drawVine(0, window.innerHeight * 0.8, -Math.PI / 4, 120, 5);
-    drawVine(window.innerWidth, window.innerHeight * 0.8, -Math.PI / 1.3, 120, 5);
-    
-    const handleResize = () => {
+      // Resizing wipes the canvas automatically
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+
+      const drawRose = (x: number, y: number, size: number) => {
+        if (currentGen !== generation) return; // Stop drawing if a resize happened
+
+        ctx.fillStyle = "rgba(255, 179, 198, 0.8)"; 
+        ctx.strokeStyle = "rgba(136, 13, 30, 0.4)"; 
+        ctx.lineWidth = 1.5;
+        
+        for (let i = 0; i < 5; i++) {
+          ctx.beginPath();
+          ctx.arc(x + Math.cos(i) * (size/2), y + Math.sin(i) * (size/2), size, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+        }
+        ctx.beginPath();
+        ctx.arc(x, y, size / 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(216, 17, 89, 0.6)"; 
+        ctx.fill();
+      };
+
+      const drawVine = (x: number, y: number, angle: number, len: number, width: number) => {
+        if (currentGen !== generation) return; // Stop drawing if a resize happened
+        if (len < 15) return; 
+        
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        const nx = x + Math.cos(angle) * len;
+        const ny = y + Math.sin(angle) * len;
+        
+        ctx.strokeStyle = "rgba(143, 162, 122, 0.5)"; 
+        ctx.lineWidth = width;
+        ctx.lineTo(nx, ny);
+        ctx.stroke();
+
+        if (Math.random() > 0.8) {
+          drawRose(nx, ny, Math.random() * 12 + 6);
+        }
+
+        setTimeout(() => {
+          if (currentGen !== generation) return; // Prevent ghost branches from spawning
+          drawVine(nx, ny, angle + (Math.random() * 0.4 - 0.2), len * 0.85, width * 0.8);
+          if (Math.random() > 0.75) drawVine(nx, ny, angle - 0.6, len * 0.6, width * 0.6);
+          if (Math.random() > 0.75) drawVine(nx, ny, angle + 0.6, len * 0.6, width * 0.6);
+        }, 150);
+      };
+
+      // Start the growth
+      drawVine(0, window.innerHeight * 0.8, -Math.PI / 4, 120, 5);
+      drawVine(window.innerWidth, window.innerHeight * 0.8, -Math.PI / 1.3, 120, 5);
     };
+
+    // Draw immediately on mount
+    initVines();
+    
+    // Debounce the resize so it doesn't stutter while actively dragging the window
+    let resizeTimer: NodeJS.Timeout;
+    const handleResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        initVines();
+      }, 300); // Waits 300ms after you stop resizing before redrawing
+    };
+
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    return () => {
+      generation++; // Kills any ongoing timeouts on unmount
+      window.removeEventListener("resize", handleResize);
+      clearTimeout(resizeTimer);
+    };
   }, []);
 
   // 2. Continuous Maroon Ribbon Trail
@@ -99,7 +121,6 @@ export default function RoseTheme() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const now = Date.now();
       
-      // Keep points from the last 500 milliseconds
       points = points.filter((p) => now - p.timestamp < 500);
 
       if (points.length > 1) {
@@ -107,13 +128,13 @@ export default function RoseTheme() {
           const p1 = points[i];
           const p2 = points[i + 1];
           const age = now - p1.timestamp;
-          const opacity = Math.max(0, 1 - age / 500); // Fades out as it gets older
+          const opacity = Math.max(0, 1 - age / 500);
 
           ctx.beginPath();
           ctx.moveTo(p1.x, p1.y);
           ctx.lineTo(p2.x, p2.y);
-          ctx.strokeStyle = `rgba(136, 13, 30, ${opacity})`; // Maroon color
-          ctx.lineWidth = 6 * opacity; // Shrinks as it fades
+          ctx.strokeStyle = `rgba(136, 13, 30, ${opacity})`; 
+          ctx.lineWidth = 6 * opacity; 
           ctx.lineCap = "round";
           ctx.lineJoin = "round";
           ctx.stroke();
@@ -165,13 +186,11 @@ export default function RoseTheme() {
 }
 
 function PetalBurst({ x, y }: { x: number; y: number }) {
-  // Increased from 8 to 12 petals for a fuller, prettier explosion
   const petals = Array.from({ length: 12 }); 
   
   return (
     <>
       {petals.map((_, i) => {
-        // Calculate a completely random angle and distance for each petal
         const angle = Math.random() * Math.PI * 2; 
         const distance = Math.random() * 150 + 50; 
         
@@ -180,15 +199,14 @@ function PetalBurst({ x, y }: { x: number; y: number }) {
             key={i}
             initial={{ x: x - 8, y: y - 12, opacity: 1, scale: 1 }}
             animate={{
-              // Using sine and cosine pushes them out in a perfect 360-degree radius
               x: x - 8 + Math.cos(angle) * distance,
               y: y - 12 + Math.sin(angle) * distance,
               opacity: 0,
-              rotate: Math.random() * 720 - 360, // Spins them wildly
+              rotate: Math.random() * 720 - 360, 
               scale: Math.random() * 0.5 + 0.2,
             }}
             transition={{ duration: 1.2, ease: "easeOut" }}
-            className="absolute w-4 h-6 bg-[#880d1e] blur-[1px]" // Maroon petals
+            className="absolute w-4 h-6 bg-[#880d1e] blur-[1px]" 
             style={{ borderRadius: "50% 0 50% 50%" }}
           />
         );
