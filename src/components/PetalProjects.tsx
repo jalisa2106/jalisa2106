@@ -2,9 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Github, ExternalLink, Shield, Code, Cpu, LayoutTemplate, X, Repeat, Sparkles } from "lucide-react";
+import { Github, ExternalLink, Shield, Code, Cpu, LayoutTemplate, X, Repeat } from "lucide-react";
 
-// Updated with 4 to 6 technologies per project to demonstrate dynamic scaling
 const projects = [
   {
     id: "carexpert",
@@ -59,18 +58,12 @@ export default function PetalProjects() {
     setTimeout(() => setIsFlipped(false), 300);
   };
 
-  // Dynamically generates perfect coordinates for ANY number of technologies
   const generateNodes = (tags: string[]) => {
     const count = tags.length;
     return tags.map((tag, i) => {
-      // Distributes dots evenly from 15% to 85% of the card height
       const y = count === 1 ? 50 : 15 + (70 / (count - 1)) * i;
-      
-      // A clean, organic alternating sweep instead of a harsh zigzag
       const xPatterns = [30, 70, 35, 65, 25, 75];
       const x = xPatterns[i % xPatterns.length];
-      
-      // Flags whether the dot is on the right half of the card
       const isRightSide = x >= 50;
       return { x, y, tag, isRightSide };
     });
@@ -155,29 +148,39 @@ export default function PetalProjects() {
                       </motion.h3>
                     </div>
                     
-                    <div className="space-y-6 mb-8 flex-grow">
+                    <div className="space-y-6 mb-8 flex-grow overflow-y-auto pr-2 custom-scrollbar">
                       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
                         <h4 className="text-sm font-bold text-accent uppercase tracking-wider mb-2">The Problem</h4>
-                        <p className="text-foreground/80 leading-relaxed">{selectedProject.problem}</p>
+                        <p className="text-foreground/80 leading-relaxed text-sm md:text-base">{selectedProject.problem}</p>
                       </motion.div>
                       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
-                        <h4 className="text-sm font-bold text-[#880d1e] uppercase tracking-wider mb-2">The Solution</h4>
-                        <p className="text-foreground/80 leading-relaxed">{selectedProject.solution}</p>
+                        <h4 className="text-sm font-bold text-[#880d1e] uppercase tracking-wider mb-2 mt-4">The Solution</h4>
+                        <p className="text-foreground/80 leading-relaxed text-sm md:text-base">{selectedProject.solution}</p>
                       </motion.div>
                     </div>
                     
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="flex items-center justify-between pt-6 border-t border-[#ffb3c6]/30">
+                      
+                      {/* Cleaned up View Tech Stack Button */}
                       <button 
                         onClick={() => setIsFlipped(true)}
-                        className="flex items-center gap-2 px-4 py-2 bg-[#fff0f3] text-accent font-bold rounded-full border border-accent/30 shadow-[0_0_15px_rgba(216,17,89,0.3)] hover:shadow-[0_0_25px_rgba(216,17,89,0.6)] hover:bg-accent hover:text-white transition-all duration-300"
+                        className="flex items-center justify-center px-4 py-2 bg-[#fff0f3] text-accent font-bold rounded-full border border-accent/30 shadow-[0_0_15px_rgba(216,17,89,0.3)] hover:shadow-[0_0_25px_rgba(216,17,89,0.6)] hover:bg-accent hover:text-white transition-all duration-300 text-sm md:text-base"
                       >
-                        <Sparkles className="w-4 h-4" /> View Tech Stack
+                        View Tech Stack
                       </button>
 
-                      <div className="flex gap-3">
-                        <a href="#" className="flex items-center gap-2 px-4 py-2 bg-foreground text-background font-semibold rounded-full hover:bg-accent hover:text-white transition-colors"><Github className="w-4 h-4" /> Code</a>
-                        <a href="#" className="flex items-center gap-2 px-4 py-2 bg-[#fff0f3] text-accent font-semibold rounded-full border border-[#ffb3c6]/50 hover:bg-accent hover:text-white transition-colors"><ExternalLink className="w-4 h-4" /> Live</a>
+                      {/* Responsive Action Buttons (Icons only on mobile) */}
+                      <div className="flex gap-2 md:gap-3">
+                        <a href="#" className="flex items-center justify-center w-10 h-10 md:w-auto md:h-auto md:px-4 md:py-2 bg-foreground text-background font-semibold rounded-full hover:bg-accent hover:text-white transition-colors">
+                          <Github className="w-4 h-4" /> 
+                          <span className="hidden md:inline ml-2 text-sm">Code</span>
+                        </a>
+                        <a href="#" className="flex items-center justify-center w-10 h-10 md:w-auto md:h-auto md:px-4 md:py-2 bg-[#fff0f3] text-accent font-semibold rounded-full border border-[#ffb3c6]/50 hover:bg-accent hover:text-white transition-colors">
+                          <ExternalLink className="w-4 h-4" /> 
+                          <span className="hidden md:inline ml-2 text-sm">Live</span>
+                        </a>
                       </div>
+                      
                     </motion.div>
                   </div>
                 </div>
@@ -188,19 +191,17 @@ export default function PetalProjects() {
                   style={{ borderRadius: "2.5rem", backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
                 >
                   <div className="p-8 md:p-12 flex flex-col h-full relative">
-                    <h3 className="text-2xl font-bold text-[#fce4ec] mb-4 flex items-center gap-3 relative z-30">
-                      <Sparkles className="text-accent w-6 h-6" /> Architecture Stack
+                    <h3 className="text-xl md:text-2xl font-bold text-[#fce4ec] mb-4 flex items-center gap-3 relative z-30">
+                      Architecture Stack
                     </h3>
 
                     <div className="relative flex-grow w-full my-4">
-                      
-                      {/* Fixed SVG Base: fill="none" guarantees a single, unbroken solid line */}
                       <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 w-full h-full z-0 overflow-visible" style={{ filter: "drop-shadow(0 0 6px #d81159)" }}>
                         <motion.path
                           d={currentNodes.length > 0 ? currentNodes.map((n, i) => `${i === 0 ? 'M' : 'L'} ${n.x} ${n.y}`).join(" ") : ""}
                           stroke="#d81159"
-                          strokeWidth="0.4" // Adjusted thickness to look premium
-                          fill="none" // Completely eliminates the clipping/breaking bug
+                          strokeWidth="0.4"
+                          fill="none"
                           strokeLinecap="round"
                           strokeLinejoin="round" 
                           initial={{ pathLength: 0 }}
@@ -214,25 +215,20 @@ export default function PetalProjects() {
 
                         return (
                           <div key={i} className="absolute inset-0 pointer-events-none">
-                            
-                            {/* The Glowing Dot exactly centered on the mathematical coordinates */}
                             <motion.div
                               initial={{ scale: 0, opacity: 0 }}
                               animate={{ scale: isFlipped ? 1 : 0, opacity: isFlipped ? 1 : 0 }}
                               transition={{ delay: isFlipped ? timeDelay : 0, duration: 0.3 }}
-                              className="w-3.5 h-3.5 rounded-full bg-accent shadow-[0_0_12px_#d81159] absolute -translate-x-1/2 -translate-y-1/2 z-20"
+                              className="w-3 h-3 md:w-3.5 md:h-3.5 rounded-full bg-accent shadow-[0_0_12px_#d81159] absolute -translate-x-1/2 -translate-y-1/2 z-20"
                               style={{ left: `${node.x}%`, top: `${node.y}%` }}
                             />
                             
-                            {/* Anti-Overlap Logic: 
-                                If the dot is on the right, push the text firmly to the right edge.
-                                If the dot is on the left, push the text firmly to the left edge. 
-                            */}
+                            {/* Replaced truncation with beautiful natural wrapping */}
                             <motion.div
                               initial={{ x: node.isRightSide ? -15 : 15, opacity: 0 }}
                               animate={{ x: 0, opacity: isFlipped ? 1 : 0 }}
                               transition={{ delay: isFlipped ? timeDelay + 0.1 : 0, duration: 0.4 }}
-                              className="absolute -translate-y-1/2 flex z-10"
+                              className="absolute -translate-y-1/2 flex z-10 w-[110px] md:w-auto"
                               style={{
                                 top: `${node.y}%`,
                                 ...(node.isRightSide 
@@ -240,11 +236,10 @@ export default function PetalProjects() {
                                   : { right: `${100 - node.x + 4}%`, left: "2%", justifyContent: "flex-end" })
                               }}
                             >
-                              <span className="text-sm md:text-base font-semibold text-[#fce4ec] bg-[#fce4ec]/10 px-4 py-2 rounded-xl border border-accent/30 backdrop-blur-sm shadow-md overflow-hidden text-ellipsis">
+                              <span className="text-xs md:text-base font-semibold text-[#fce4ec] bg-[#fce4ec]/10 px-3 py-1.5 md:px-4 md:py-2 rounded-xl border border-accent/30 backdrop-blur-sm shadow-md text-center leading-snug break-words">
                                 {node.tag}
                               </span>
                             </motion.div>
-                            
                           </div>
                         );
                       })}
@@ -259,7 +254,6 @@ export default function PetalProjects() {
                         <Repeat className="w-5 h-5" />
                       </button>
                     </div>
-
                   </div>
                 </div>
 
