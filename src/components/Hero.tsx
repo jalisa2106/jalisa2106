@@ -4,8 +4,17 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Terminal, ShieldCheck, User, Code2, ChevronRight, ChevronDown, Flower2 } from "lucide-react";
 
+// The dynamic roles that will cycle in your hero subtitle
+const ROLES = [
+  "Full-Stack Developer",
+  "AI & ML Enthusiast",
+  "Data Science Explorer",
+  "Cybersecurity Enthusiast"
+];
+
 export default function Hero() {
   const [isBooting, setIsBooting] = useState(true);
+  const [roleIndex, setRoleIndex] = useState(0);
 
   // Controls how long the ID card stays on screen (3 seconds)
   useEffect(() => {
@@ -14,6 +23,17 @@ export default function Hero() {
     }, 3000);
     return () => clearTimeout(timer);
   }, []);
+
+  // Controls the animated typing cycle for your roles
+  useEffect(() => {
+    if (isBooting) return; // Don't start cycling until the boot screen is done
+    
+    const interval = setInterval(() => {
+      setRoleIndex((prev) => (prev + 1) % ROLES.length);
+    }, 3000); // Changes role every 3 seconds
+    
+    return () => clearInterval(interval);
+  }, [isBooting]);
 
   // Smooth scroll handler for the bounce arrow
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -70,8 +90,8 @@ export default function Hero() {
                 className="flex items-center gap-3 text-foreground"
               >
                 <Code2 className="w-5 h-5 text-accent/70" />
-                <span className="text-foreground/60">Role:</span>
-                <span className="font-bold">Full-Stack Developer</span>
+                <span className="text-foreground/60">Status:</span>
+                <span className="font-bold">CS Student @ Charusat</span>
               </motion.div>
 
               {/* Security Mode Row */}
@@ -113,15 +133,34 @@ export default function Hero() {
               Jalisa <span className="text-accent">Malik</span>
             </motion.h1>
             
-            <motion.p 
-              className="text-lg md:text-2xl text-foreground/80 max-w-2xl leading-relaxed mb-10"
+            {/* Dynamic Animated Subtitle */}
+            <motion.div 
+              className="text-lg md:text-2xl text-foreground/80 max-w-2xl leading-relaxed mb-10 h-[60px]" // Fixed height to prevent jumping
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.8 }}
             >
-              Full-Stack Developer & Cybersecurity Enthusiast. <br className="hidden md:block" />
-              Crafting secure, aesthetic digital experiences.
-            </motion.p>
+              <div className="flex items-center justify-center gap-2">
+                <span>Computer Science Student &</span>
+                <div className="relative overflow-hidden inline-block text-accent font-semibold h-[32px]">
+                  <AnimatePresence mode="popLayout">
+                    <motion.span
+                      key={roleIndex}
+                      initial={{ y: 30, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: -30, opacity: 0 }}
+                      transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
+                      className="inline-block whitespace-nowrap"
+                    >
+                      {ROLES[roleIndex]}
+                    </motion.span>
+                  </AnimatePresence>
+                </div>
+              </div>
+              <p className="mt-2 text-foreground/60 text-base md:text-lg">
+                Crafting secure, aesthetic digital experiences.
+              </p>
+            </motion.div>
             
             <motion.div 
               className="flex flex-col sm:flex-row items-center gap-4"
@@ -148,9 +187,6 @@ export default function Hero() {
             {/* ============================== */
             /* 3. FLORAL SCROLL INDICATOR     */
             /* ============================== */}
-            {/* FIX: Switched from 'absolute' positioning to a generous 'mt-24' (margin-top). 
-              This forces the indicator to stay below the buttons no matter how short the screen is.
-            */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -162,7 +198,6 @@ export default function Hero() {
                 onClick={handleScroll}
                 className="flex flex-col items-center group cursor-pointer"
                 aria-label="Scroll to About section"
-                // The bounce animation is now applied to the entire group
                 animate={{ y: [0, 12, 0] }}
                 transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
               >
