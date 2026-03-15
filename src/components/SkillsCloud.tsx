@@ -46,8 +46,7 @@ export default function SkillsCloud() {
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
 
   return (
-    <section id="skills" className="py-20 z-10 relative overflow-hidden">
-      
+    <section id="skills" className="py-20 z-10 relative">      
       <style>{`
         @keyframes orbit { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes orbit-reverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }

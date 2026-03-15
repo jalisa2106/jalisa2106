@@ -1,10 +1,22 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Github, ExternalLink, Code, GraduationCap, Map, X, Repeat } from "lucide-react";
 
-const projects = [
+type Project = {
+  id: string;
+  title: string;
+  icon: ReactNode;
+  problem: string;
+  solution: string;
+  tags: string[];
+  github: string;
+  status?: string; 
+  live?: string;   
+};
+
+const projects: Project[] = [
   {
     id: "arcade",
     title: "ARCADE Portal",
