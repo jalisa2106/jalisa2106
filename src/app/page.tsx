@@ -2,7 +2,8 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import SkillsCloud from "@/components/SkillsCloud";
-import BentoGrid from "@/components/BentoGrid";
+// import BentoGrid from "@/components/BentoGrid";
+import PetalProjects from "@/components/PetalProjects";
 import Contact from "@/components/Contact";
 import { Heart } from "lucide-react"; 
 
@@ -15,10 +16,12 @@ export default function Home() {
         <Hero />
         <About />
         
-        {/* Skills injected here */}
         <SkillsCloud />
         
-        <BentoGrid />
+        {/* Swapped BentoGrid for the interactive PetalProjects */}
+        {/* <BentoGrid /> */}
+        <PetalProjects />
+
         <Contact />
       </div>
 
