@@ -65,7 +65,7 @@ export default function About() {
               </div>
               <div>
                 <h4 className="font-bold text-foreground mb-1">Cybersecurity</h4>
-                <p className="text-sm text-foreground/70">Actively hunting bugs on Intigriti and ensuring robust security within application pipelines.</p>
+                <p className="text-sm text-foreground/70">Currently exploring the fundamentals of security architecture, vulnerability research, and safe coding practices.</p>
               </div>
             </div>
 
