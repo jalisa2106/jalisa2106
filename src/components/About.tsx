@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Sparkles, GraduationCap, Code2, ShieldCheck } from "lucide-react";
+import { Sparkles, GraduationCap, Code2, ShieldCheck, Brain } from "lucide-react";
 
 export default function About() {
   return (
@@ -21,7 +21,7 @@ export default function About() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Left Column: The Narrative */}
+          {/* Left Column: The Narrative (Kept exactly as it is) */}
           <div className="space-y-6 text-lg text-foreground/80 leading-relaxed">
             <p>
               I am a Computer Science student at Charusat University with a deep 
@@ -36,37 +36,39 @@ export default function About() {
             </p>
           </div>
 
-          {/* Right Column: Core Focus Areas */}
+          {/* Right Column: Core Focus Areas (Updated to match your specific identities) */}
           <div className="flex flex-col gap-6 justify-center">
+            
             <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#fff0f3]/50 border border-[#ffb3c6]/40 transition-transform hover:-translate-y-1 duration-200">
               <div className="p-3 bg-white rounded-xl shadow-sm">
                 <Code2 className="w-6 h-6 text-accent" />
               </div>
               <div>
-                <h4 className="font-bold text-foreground mb-1">Full-Stack Architecture</h4>
-                <p className="text-sm text-foreground/70">Crafting seamless experiences using Next.js, Tailwind CSS, and scalable databases.</p>
+                <h4 className="font-bold text-foreground mb-1">Full-Stack Development</h4>
+                <p className="text-sm text-foreground/70">Architecting seamless web experiences using Next.js, TypeScript, and scalable databases.</p>
               </div>
             </div>
 
             <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#fff0f3]/50 border border-[#ffb3c6]/40 transition-transform hover:-translate-y-1 duration-200">
               <div className="p-3 bg-white rounded-xl shadow-sm">
-                <ShieldCheck className="w-6 h-6 text-accent" />
+                <Brain className="w-6 h-6 text-accent" />
               </div>
               <div>
-                <h4 className="font-bold text-foreground mb-1">Cybersecurity & Research</h4>
-                <p className="text-sm text-foreground/70">Actively hunting bugs on Intigriti and securing application pipelines.</p>
+                <h4 className="font-bold text-foreground mb-1">AI/ML & Data Science</h4>
+                <p className="text-sm text-foreground/70">Exploring Deep Learning, Gen AI, and foundational data science to build intelligent solutions.</p>
               </div>
             </div>
             
             <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#fff0f3]/50 border border-[#ffb3c6]/40 transition-transform hover:-translate-y-1 duration-200">
               <div className="p-3 bg-white rounded-xl shadow-sm">
-                <GraduationCap className="w-6 h-6 text-accent" />
+                <ShieldCheck className="w-6 h-6 text-accent" />
               </div>
               <div>
-                <h4 className="font-bold text-foreground mb-1">Continuous Learning</h4>
-                <p className="text-sm text-foreground/70">Mastering System Analysis and Design alongside advanced Data Structures.</p>
+                <h4 className="font-bold text-foreground mb-1">Cybersecurity</h4>
+                <p className="text-sm text-foreground/70">Actively hunting bugs on Intigriti and ensuring robust security within application pipelines.</p>
               </div>
             </div>
+
           </div>
         </div>
       </motion.div>
