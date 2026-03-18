@@ -6,6 +6,7 @@ import SkillsCloud from "@/components/SkillsCloud";
 import PetalProjects from "@/components/PetalProjects";
 import OpenSource from "@/components/OpenSource";
 import Certifications from "@/components/Certifications";
+import ArchitectBlueprint from "@/components/ArchitectBlueprint"; // <-- Import here
 import { Heart } from "lucide-react"; 
 
 export default function Home() {
@@ -13,19 +14,16 @@ export default function Home() {
     <main className="min-h-screen text-foreground transition-colors duration-500 selection:bg-accent/30 flex flex-col">
       <Navbar />
       
-      <div className="max-w-6xl mx-auto pt-20 px-6 relative z-10 flex-grow">
+      <div className="max-w-6xl mx-auto pt-20 px-6 relative z-10 flex-grow space-y-10">
         <Hero />
         <About />
-        
         <SkillsCloud />
-        
         {/* <Bentogrid /> */}
-
         <PetalProjects />
-
         <OpenSource />
-        
         <Certifications />
+        
+        <ArchitectBlueprint /> 
 
       </div>
 
