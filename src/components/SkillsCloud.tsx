@@ -13,6 +13,9 @@ const CATEGORIES = [
       { name: "JavaScript", icon: "https://skillicons.dev/icons?i=js", link: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
       { name: "TypeScript", icon: "https://skillicons.dev/icons?i=ts", link: "https://www.typescriptlang.org/" },
       { name: "PHP", icon: "https://skillicons.dev/icons?i=php", link: "https://www.php.net/" },
+      { name: "Python", icon: "https://skillicons.dev/icons?i=py", link: "https://www.python.org/" },
+      { name: "HTML", icon: "https://skillicons.dev/icons?i=html", link: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
+      { name: "CSS", icon: "https://skillicons.dev/icons?i=css", link: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
     ]
   },
   {
@@ -21,9 +24,6 @@ const CATEGORIES = [
       { name: "React", icon: "https://skillicons.dev/icons?i=react", link: "https://react.dev/" },
       { name: "Next.js", icon: "https://skillicons.dev/icons?i=nextjs", link: "https://nextjs.org/" },
       { name: "Node.js", icon: "https://skillicons.dev/icons?i=nodejs", link: "https://nodejs.org/" },
-      { name: "Python", icon: "https://skillicons.dev/icons?i=py", link: "https://www.python.org/" },
-      { name: "HTML", icon: "https://skillicons.dev/icons?i=html", link: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
-      { name: "CSS", icon: "https://skillicons.dev/icons?i=css", link: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
     ]
   },
   {

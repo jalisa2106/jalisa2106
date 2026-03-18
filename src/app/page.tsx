@@ -4,6 +4,8 @@ import About from "@/components/About";
 import SkillsCloud from "@/components/SkillsCloud";
 // import BentoGrid from "@/components/BentoGrid";
 import PetalProjects from "@/components/PetalProjects";
+import OpenSource from "@/components/OpenSource";
+import Certifications from "@/components/Certifications";
 import { Heart } from "lucide-react"; 
 
 export default function Home() {
@@ -13,13 +15,17 @@ export default function Home() {
       
       <div className="max-w-6xl mx-auto pt-20 px-6 relative z-10 flex-grow">
         <Hero />
-          <About />
+        <About />
         
-          <SkillsCloud />
+        <SkillsCloud />
         
         {/* <Bentogrid /> */}
 
-          <PetalProjects />
+        <PetalProjects />
+
+        <OpenSource />
+        
+        <Certifications />
 
       </div>
 
