@@ -63,7 +63,7 @@ const projects: Project[] = [
     solution:
       "Built a Microsoft Edge extension functioning as an API Intelligence Tool, instantly auto-generating TypeScript interfaces directly from live responses.",
     tags: ["Edge Extension", "TypeScript", "API Intelligence", "Automation"],
-    github: "#",
+    github: "https://github.com/jalisa2106/Skeleton-API",
     status: "Work in Progress",
   },
 ];
