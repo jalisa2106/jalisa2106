@@ -10,6 +10,7 @@ import {
   Map,
   X,
   Repeat,
+  Cpu 
 } from "lucide-react";
 
 type Project = {
@@ -25,6 +26,37 @@ type Project = {
 };
 
 const projects: Project[] = [
+  {
+    id: "byteback",
+    title: "ByteBack",
+    icon: <Cpu className="w-10 h-10 text-[#d81159]" />,
+    problem:
+      "Code review processes are often slow and miss subtle logic flaws. Existing AI tools require exposing proprietary code to third-party servers.",
+    solution:
+      "Architected a serverless AI code review suite with Next.js and Gemini 2.5. Engineered a zero-trust BYOK (Bring Your Own Key) architecture via browser-side storage, ensuring code remains strictly private.",
+    tags: [
+      "Next.js 16",
+      "TypeScript",
+      "Tailwind CSS",
+      "Gemini SDK",
+      "Serverless Auth",
+      "BYOK Architecture"
+    ],
+    github: "https://github.com/Sp2736/ByteBack", 
+    live: "https://byte-back.vercel.app",
+  },
+  {
+    id: "skeleton-api",
+    title: "Skeleton API",
+    icon: <Code className="w-10 h-10 text-[#d81159]" />,
+    problem:
+      "Developers waste valuable time manually writing and maintaining TypeScript interfaces and client code for complex, evolving API responses.",
+    solution:
+      "Built a Microsoft Edge extension functioning as an API Intelligence Tool, instantly auto-generating TypeScript interfaces directly from live responses.",
+    tags: ["Edge Extension", "TypeScript", "API Intelligence", "Automation"],
+    github: "https://github.com/jalisa2106/Skeleton-API",
+    live: "https://microsoftedge.microsoft.com/addons/detail/jjjfflokojljcagdnfgmeibojganklgb", 
+  },
   {
     id: "arcade",
     title: "ARCADE Portal",
@@ -53,18 +85,6 @@ const projects: Project[] = [
       "Designed an immersive, interactive destination guide featuring clean, responsive layouts, modern UI/UX principles, and seamless navigation entirely from scratch.",
     tags: ["HTML5", "CSS3", "JavaScript", "UI/UX Design"],
     github: "https://github.com/jalisa2106/Greece-Explorer.git",
-  },
-  {
-    id: "skeleton-api",
-    title: "Skeleton API",
-    icon: <Code className="w-10 h-10 text-[#d81159]" />,
-    problem:
-      "Developers waste valuable time manually writing and maintaining TypeScript interfaces and client code for complex, evolving API responses.",
-    solution:
-      "Built a Microsoft Edge extension functioning as an API Intelligence Tool, instantly auto-generating TypeScript interfaces directly from live responses.",
-    tags: ["Edge Extension", "TypeScript", "API Intelligence", "Automation"],
-    github: "https://github.com/jalisa2106/Skeleton-API",
-    status: "Work in Progress",
   },
 ];
 
@@ -169,7 +189,8 @@ export default function PetalProjects() {
 
             <motion.div
               layoutId={`card-${selectedProject.id}`}
-              className="relative w-full max-w-2xl h-[550px] z-10"
+              // Increased height slightly to prevent any potential overflow
+              className="relative w-full max-w-2xl h-[580px] z-10"
               style={{ borderRadius: "2.5rem" }}
             >
               <motion.div
@@ -199,7 +220,8 @@ export default function PetalProjects() {
                     <X className="w-5 h-5" />
                   </button>
 
-                  <div className="p-8 md:p-12 flex flex-col h-full">
+                  {/* Reduced p-12 to p-10 to give more internal vertical space */}
+                  <div className="p-8 md:p-10 flex flex-col h-full">
                     <div className="flex items-center gap-4 mb-6">
                       <motion.div
                         layoutId={`icon-${selectedProject.id}`}
@@ -215,7 +237,8 @@ export default function PetalProjects() {
                       </motion.h3>
                     </div>
 
-                    <div className="space-y-6 mb-8 flex-grow overflow-y-auto pr-2 custom-scrollbar">
+                    {/* Reduced mb-8 to mb-4 to stop it from pushing against the footer */}
+                    <div className="space-y-5 mb-4 flex-grow overflow-y-auto pr-2 custom-scrollbar">
                       <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -391,7 +414,7 @@ export default function PetalProjects() {
                               className={`absolute -translate-y-1/2 flex z-10 ${node.isRightSide ? "justify-start" : "justify-end"}`}
                               style={{
                                 top: `${node.y}%`,
-                                transform: "translateZ(1px)", // FIX: Hardware acceleration for crisp text
+                                transform: "translateZ(1px)", 
                                 ...(node.isRightSide
                                   ? {
                                       left: `calc(${node.x}% + 1.25rem)`,
@@ -403,7 +426,6 @@ export default function PetalProjects() {
                                     }),
                               }}
                             >
-                              {/* FIX: Removed nested backdrop-blur to prevent browser rasterization blur */}
                               <span
                                 className="text-xs md:text-base font-semibold text-[#fce4ec] bg-white/5 px-3 py-1.5 md:px-4 md:py-2 rounded-xl border border-accent/30 shadow-md text-center leading-snug break-words"
                                 style={{ WebkitFontSmoothing: "antialiased" }}
