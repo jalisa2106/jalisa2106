@@ -2,38 +2,36 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Terminal, ShieldCheck, User, Code2, ChevronRight, ChevronDown, Flower2 } from "lucide-react";
-
-// The dynamic roles that will cycle in your hero subtitle
-const ROLES = [
-  "Full-Stack Developer",
-  "AI & ML Enthusiast",
-  "Data Science Explorer",
-  "Cybersecurity Enthusiast"
-];
+import { 
+  Terminal, Cpu, Database, Network, ChevronRight, Activity, 
+  Code2, User, ShieldCheck, Flower2, ChevronDown 
+} from "lucide-react";
 
 export default function Hero() {
-  const [isBooting, setIsBooting] = useState(true);
-  const [roleIndex, setRoleIndex] = useState(0);
+  const [isInitializing, setIsInitializing] = useState(true);
 
-  // Controls how long the ID card stays on screen (3 seconds)
+  // Manage Initialization, Scroll Locking, and Force-to-Top
   useEffect(() => {
+    // 1. Force the page to scroll to the top immediately on refresh/reload
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
+    // 2. Prevent scrolling and interaction while booting
+    document.body.style.overflow = "hidden";
+    
+    // 3. Unlock after 3 seconds (giving the Identity Card time to finish animating)
     const timer = setTimeout(() => {
-      setIsBooting(false);
+      setIsInitializing(false);
+      document.body.style.overflow = "";
     }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
 
-  // Controls the animated typing cycle for your roles
-  useEffect(() => {
-    if (isBooting) return; // Don't start cycling until the boot screen is done
-    
-    const interval = setInterval(() => {
-      setRoleIndex((prev) => (prev + 1) % ROLES.length);
-    }, 3000); // Changes role every 3 seconds
-    
-    return () => clearInterval(interval);
-  }, [isBooting]);
+    return () => {
+      clearTimeout(timer);
+      document.body.style.overflow = "";
+    };
+  }, []);
 
   // Smooth scroll handler for the bounce arrow
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -45,175 +43,291 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-[calc(100vh-80px)] flex flex-col items-center justify-center pt-10 pb-20">
-      
-      <AnimatePresence mode="wait">
-        {isBooting ? (
-          /* ============================== */
-          /* 1. DEVELOPER IDENTITY CARD     */
-          /* ============================== */
+    <>
+      {/* ================= PRELOADER (SYS.INIT WITH IDENTITY CARD) ================= */}
+      <AnimatePresence>
+        {isInitializing && (
           <motion.div
-            key="identity-card"
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 1.05, filter: "blur(10px)", transition: { duration: 0.5 } }}
-            className="w-full max-w-md p-8 rounded-[2rem] bg-card/80 backdrop-blur-xl border border-accent/30 shadow-[0_20px_50px_-15px_rgba(216,17,89,0.3)] relative overflow-hidden"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0, y: "-100%" }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            // Tweaked translucency: lower background opacity, medium blur for frosted glass look
+            className="fixed inset-0 z-[9999] bg-background/10 backdrop-blur-md flex flex-col items-center justify-center pointer-events-auto"
           >
-            {/* Soft glowing background orb inside the card */}
-            <div className="absolute top-0 right-0 -mt-10 -mr-10 w-32 h-32 bg-accent/20 blur-[40px] rounded-full pointer-events-none" />
-
-            <div className="flex items-center gap-3 mb-8 border-b border-[#ffb3c6]/40 pb-4">
-              <Terminal className="w-6 h-6 text-accent" />
-              <motion.span 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-sm font-bold tracking-widest text-foreground/70 uppercase"
-              >
-                Initializing Portfolio...
-              </motion.span>
-            </div>
-
-            <div className="space-y-5 font-mono text-sm md:text-base">
-              {/* Name Row */}
-              <motion.div 
-                initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 }}
-                className="flex items-center gap-3 text-foreground"
-              >
-                <User className="w-5 h-5 text-accent/70" />
-                <span className="text-foreground/60">Name:</span>
-                <span className="font-bold text-accent">Jalisa Malik</span>
-              </motion.div>
-
-              {/* Role Row */}
-              <motion.div 
-                initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.2 }}
-                className="flex items-center gap-3 text-foreground"
-              >
-                <Code2 className="w-5 h-5 text-accent/70" />
-                <span className="text-foreground/60">Status:</span>
-                <span className="font-bold">CS Student @ Charusat</span>
-              </motion.div>
-
-              {/* Security Mode Row */}
-              <motion.div 
-                initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.9 }}
-                className="flex items-center gap-3 text-foreground"
-              >
-                <ShieldCheck className="w-5 h-5 text-[#6b8e23]" /> 
-                <span className="text-foreground/60">Security Mode:</span>
-                <span className="font-bold text-[#6b8e23]">Enabled</span>
-                
-                <motion.div 
-                  animate={{ opacity: [1, 0, 1] }} 
-                  transition={{ repeat: Infinity, duration: 0.8 }} 
-                  className="w-2 h-4 bg-accent ml-1" 
-                />
-              </motion.div>
-            </div>
-          </motion.div>
-
-        ) : (
-
-          /* ============================== */
-          /* 2. MAIN HERO SECTION           */
-          /* ============================== */
-          <motion.div
-            key="main-hero"
-            initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-center z-10 flex flex-col items-center w-full h-full justify-center"
-          >
-            <motion.h1 
-              className="text-5xl md:text-7xl font-extrabold tracking-tight text-foreground mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-            >
-              Jalisa <span className="text-accent">Malik</span>
-            </motion.h1>
-            
-            {/* Dynamic Animated Subtitle */}
-            <motion.div 
-              className="text-lg md:text-2xl text-foreground/80 max-w-2xl leading-relaxed mb-10 h-[60px]" // Fixed height to prevent jumping
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-            >
-              <div className="flex items-center justify-center gap-2">
-                <span>Computer Science Student &</span>
-                <div className="relative overflow-hidden inline-block text-accent font-semibold h-[32px]">
-                  <AnimatePresence mode="popLayout">
-                    <motion.span
-                      key={roleIndex}
-                      initial={{ y: 30, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      exit={{ y: -30, opacity: 0 }}
-                      transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
-                      className="inline-block whitespace-nowrap"
-                    >
-                      {ROLES[roleIndex]}
-                    </motion.span>
-                  </AnimatePresence>
-                </div>
-              </div>
-              <p className="mt-2 text-foreground/60 text-base md:text-lg">
-                Crafting secure, aesthetic digital experiences.
-              </p>
-            </motion.div>
-            
-            <motion.div 
-              className="flex flex-col sm:flex-row items-center gap-4"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-            >
-              <a 
-                href="#work" 
-                className="px-8 py-4 bg-accent text-white font-bold rounded-full flex items-center gap-2 hover:bg-[#880d1e] transition-all duration-300 shadow-[0_10px_20px_-10px_rgba(216,17,89,0.5)] hover:shadow-[0_15px_30px_-10px_rgba(216,17,89,0.7)] group"
-              >
-                View Projects 
-                <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </a>
-              <a 
-                href="#about" 
-                onClick={handleScroll}
-                className="px-8 py-4 bg-[#fff0f3] text-foreground font-bold rounded-full border border-[#ffb3c6]/50 hover:border-accent hover:text-accent transition-all duration-300 shadow-sm"
-              >
-                About Me
-              </a>
-            </motion.div>
-
-            {/* ============================== */
-            /* 3. FLORAL SCROLL INDICATOR     */
-            /* ============================== */}
+            {/* Developer Identity Card */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.5, duration: 1 }}
-              className="mt-24" 
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              className="w-full max-w-md p-8 rounded-[2rem] bg-card/80 backdrop-blur-xl border border-accent/30 shadow-[0_20px_50px_-15px_rgba(216,17,89,0.3)] relative overflow-hidden"
             >
-              <motion.a 
-                href="#about" 
-                onClick={handleScroll}
-                className="flex flex-col items-center group cursor-pointer"
-                aria-label="Scroll to About section"
-                animate={{ y: [0, 12, 0] }}
-                transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-              >
-                <Flower2 className="w-5 h-5 text-[#ffb3c6] mb-2 group-hover:text-accent transition-colors duration-300" />
-                <div
-                  className="p-3 bg-card/60 backdrop-blur-md rounded-full border border-[#ffb3c6]/50 shadow-sm group-hover:border-accent group-hover:shadow-[0_0_15px_rgba(216,17,89,0.3)] transition-all duration-300"
-                >
-                  <ChevronDown className="w-5 h-5 text-foreground/60 group-hover:text-accent transition-colors duration-300" />
-                </div>
-              </motion.a>
-            </motion.div>
+              {/* Soft glowing background orb inside the card */}
+              <div className="absolute top-0 right-0 -mt-10 -mr-10 w-32 h-32 bg-accent/20 blur-[40px] rounded-full pointer-events-none" />
 
+              <div className="flex items-center gap-3 mb-8 border-b border-[#ffb3c6]/40 pb-4">
+                <Terminal className="w-6 h-6 text-accent" />
+                <motion.span 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-sm font-bold tracking-widest text-foreground/70 uppercase"
+                >
+                  Initializing Portfolio...
+                </motion.span>
+              </div>
+
+              <div className="space-y-5 font-mono text-sm md:text-base">
+                {/* Name Row */}
+                <motion.div 
+                  initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 }}
+                  className="flex items-center gap-3 text-foreground"
+                >
+                  <User className="w-5 h-5 text-accent/70" />
+                  <span className="text-foreground/60">Name:</span>
+                  <span className="font-bold text-accent">Jalisa Malik</span>
+                </motion.div>
+
+                {/* Role Row */}
+                <motion.div 
+                  initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.2 }}
+                  className="flex items-center gap-3 text-foreground"
+                >
+                  <Code2 className="w-5 h-5 text-accent/70" />
+                  <span className="text-foreground/60">Status:</span>
+                  <span className="font-bold">CS Student @ Charusat</span>
+                </motion.div>
+
+                {/* Security Mode Row */}
+                <motion.div 
+                  initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.9 }}
+                  className="flex items-center gap-3 text-foreground"
+                >
+                  <ShieldCheck className="w-5 h-5 text-[#6b8e23]" /> 
+                  <span className="text-foreground/60">Security Mode:</span>
+                  <span className="font-bold text-[#6b8e23]">Enabled</span>
+                  
+                  <motion.div 
+                    animate={{ opacity: [1, 0, 1] }} 
+                    transition={{ repeat: Infinity, duration: 0.8 }} 
+                    className="w-2 h-4 bg-accent ml-1" 
+                  />
+                </motion.div>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-      
-    </section>
+
+      {/* ================= HERO SECTION ================= */}
+      <section className="relative min-h-[calc(100vh-100px)] w-full flex items-center justify-center z-10 overflow-hidden">
+        
+        {/* Background Blueprint Grid - Animated to look like it is rendering during boot */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2.5, ease: "easeInOut" }}
+          className="absolute inset-0 z-0 pointer-events-none"
+        >
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#d8115915_1px,transparent_1px),linear-gradient(to_bottom,#d8115915_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+        </motion.div>
+
+        <div className="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10 py-12">
+          
+          {/* ================= LEFT COLUMN: THE NARRATIVE ================= */}
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left mt-8 lg:mt-0 relative z-20">
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 3.1 }} // Waits for preloader to slide up
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#fff0f3] border border-[#ffb3c6]/50 text-accent font-mono text-xs md:text-sm mb-6 lg:mb-8 shadow-sm"
+            >
+              <Activity className="w-4 h-4 animate-pulse" />
+              <span>SYS.INIT // JALISA_MALIK</span>
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 3.2 }}
+              className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-[1.1] mb-6"
+            >
+              Architecting <br className="hidden lg:block" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-[#ff4d6d] to-accent bg-[length:200%_auto] animate-gradient">
+                Intelligent
+              </span>{" "}
+              Ecosystems.
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 3.3 }}
+              className="text-foreground/70 text-base md:text-lg max-w-xl mb-8 lg:mb-10 leading-relaxed"
+            >
+              Computer Science student & Full-Stack Developer. I specialize in engineering scalable web architectures, integrating zero-trust security, and building AI-driven solutions.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 3.4 }}
+              className="flex flex-wrap justify-center lg:justify-start gap-4 font-mono text-sm"
+            >
+              <a
+                href="#work"
+                className="flex items-center gap-2 px-6 py-3.5 bg-accent text-white font-bold rounded-xl shadow-[0_5px_15px_rgba(216,17,89,0.3)] hover:shadow-[0_5px_25px_rgba(216,17,89,0.5)] transition-all hover:-translate-y-1 group"
+              >
+                <Terminal className="w-4 h-4" />
+                Deploy &lt;Project /&gt;
+              </a>
+              <a
+                href="#blueprint"
+                className="flex items-center gap-2 px-6 py-3.5 bg-[#fff0f3] text-accent font-bold rounded-xl border border-accent/20 hover:bg-[#ffb3c6]/30 transition-all hover:-translate-y-1 group"
+              >
+                init_contact()
+                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </a>
+            </motion.div>
+          </div>
+
+          {/* ================= RIGHT COLUMN: THE COMPOSITE MONITOR ================= */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 3.5 }}
+            className="relative w-full h-[400px] lg:h-[500px] flex items-center justify-center lg:justify-end"
+          >
+            {/* Glowing Background Orb */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 2, delay: 3.5 }}
+              className="absolute w-72 h-72 bg-accent/20 rounded-full blur-[80px] lg:right-10" 
+            />
+
+            {/* MAIN GLASS PANEL (System Architecture) */}
+            <motion.div
+              animate={{ y: [-8, 8, -8] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              className="relative z-20 w-full max-w-sm rounded-2xl bg-card/60 backdrop-blur-xl border border-[#ffb3c6]/40 shadow-2xl p-6 overflow-hidden"
+            >
+              {/* Top Bar */}
+              <div className="flex justify-between items-center mb-6 pb-4 border-b border-[#ffb3c6]/20">
+                <div className="flex items-center gap-2 text-foreground/80">
+                  <Cpu className="w-4 h-4 text-accent" />
+                  <span className="font-mono text-xs font-bold tracking-wider">SYSTEM_ARCHITECTURE</span>
+                </div>
+                <div className="flex gap-1.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+                </div>
+              </div>
+
+              {/* Live Data Nodes */}
+              <div className="space-y-5 font-mono text-xs md:text-sm">
+                <div className="flex items-start gap-3 group cursor-default">
+                  <div className="mt-0.5 p-1.5 bg-[#fff0f3] rounded-md border border-[#ffb3c6]/50 group-hover:border-accent transition-colors"><Code2 className="w-4 h-4 text-accent" /></div>
+                  <div>
+                    <div className="text-foreground/50 mb-0.5 text-[10px] md:text-xs">&gt;&nbsp;Core_Engine.mount()</div>
+                    <div className="text-foreground font-semibold">Next.js 16 x TypeScript</div>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-3 group cursor-default">
+                  <div className="mt-0.5 p-1.5 bg-[#fff0f3] rounded-md border border-[#ffb3c6]/50 group-hover:border-accent transition-colors"><Database className="w-4 h-4 text-accent" /></div>
+                  <div>
+                    <div className="text-foreground/50 mb-0.5 text-[10px] md:text-xs">&gt;&nbsp;AI_Subsystem.init()</div>
+                    <div className="text-foreground font-semibold">Gemini Flash / LLM Prompts</div>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 group cursor-default">
+                  <div className="mt-0.5 p-1.5 bg-[#fff0f3] rounded-md border border-[#ffb3c6]/50 group-hover:border-accent transition-colors"><Network className="w-4 h-4 text-accent" /></div>
+                  <div>
+                    <div className="text-foreground/50 mb-0.5 text-[10px] md:text-xs">&gt;&nbsp;Security_Protocol.verify()</div>
+                    <div className="text-green-500 font-semibold drop-shadow-[0_0_8px_rgba(34,197,94,0.4)]">Zero-Trust Secured</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Compiling Bar */}
+              <div className="mt-8 pt-5 border-t border-[#ffb3c6]/20">
+                <div className="flex justify-between text-[10px] mb-2 font-mono text-foreground/60 font-semibold uppercase tracking-widest">
+                  <span>Compiling Future</span>
+                  <span className="text-accent">99%</span>
+                </div>
+                <div className="h-1.5 w-full bg-background/80 rounded-full overflow-hidden border border-[#ffb3c6]/20">
+                  <motion.div
+                    initial={{ width: "0%" }}
+                    animate={{ width: "99%" }}
+                    transition={{ duration: 2, ease: "easeOut", delay: 4.0 }}
+                    className="h-full bg-gradient-to-r from-accent/50 to-accent rounded-full relative"
+                  >
+                    <motion.div 
+                      animate={{ x: ["-100%", "200%"] }}
+                      transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+                      className="absolute inset-0 bg-white/40 w-1/2 skew-x-12" 
+                    />
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* SECONDARY GLASS PANEL (Live Metrics) - Floating behind */}
+            <motion.div
+              animate={{ y: [10, -10, 10] }}
+              transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              className="absolute z-10 -right-4 -bottom-6 md:-right-8 md:-bottom-2 w-56 rounded-2xl bg-card/80 backdrop-blur-2xl border border-[#ffb3c6]/40 shadow-xl p-5 hidden sm:block"
+            >
+              <div className="flex justify-between items-center mb-3">
+                <div className="text-[10px] font-mono font-bold text-foreground/60 uppercase tracking-widest">Live Metrics</div>
+                <Activity className="w-3 h-3 text-accent" />
+              </div>
+              
+              <div className="flex items-end gap-2 mb-4">
+                <div className="text-3xl font-black text-accent leading-none">~O(1)</div>
+                <div className="text-xs text-foreground/60 font-semibold mb-0.5">Complexity</div>
+              </div>
+
+              {/* Animated Equalizer Graph */}
+              <div className="flex gap-1.5 h-10 items-end justify-between">
+                {[40, 70, 45, 90, 60, 85, 50, 100].map((h, i) => (
+                  <motion.div
+                    key={i}
+                    animate={{ height: [`${h}%`, `${h > 50 ? h - 30 : h + 30}%`, `${h}%`] }}
+                    transition={{ duration: 1.5 + i * 0.2, repeat: Infinity, ease: "easeInOut" }}
+                    className="w-full bg-gradient-to-t from-accent/20 to-accent/80 rounded-sm"
+                  />
+                ))}
+              </div>
+            </motion.div>
+
+          </motion.div>
+        </div>
+
+        {/* ================= PERFECTLY CENTERED BOTTOM ARROW ================= */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 3.8, duration: 1 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center z-30"
+        >
+          <motion.a 
+            href="#about" 
+            onClick={handleScroll}
+            className="flex flex-col items-center group cursor-pointer"
+            aria-label="Scroll to About section"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+          >
+            <Flower2 className="w-5 h-5 text-[#ffb3c6] mb-2 group-hover:text-accent transition-colors duration-300" />
+            <div className="p-3 bg-card/60 backdrop-blur-md rounded-full border border-[#ffb3c6]/50 shadow-sm group-hover:border-accent group-hover:shadow-[0_0_15px_rgba(216,17,89,0.3)] transition-all duration-300">
+              <ChevronDown className="w-5 h-5 text-foreground/60 group-hover:text-accent transition-colors duration-300" />
+            </div>
+          </motion.a>
+        </motion.div>
+
+      </section>
+    </>
   );
 }

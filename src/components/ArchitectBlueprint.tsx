@@ -51,7 +51,7 @@ export default function ArchitectBlueprint() {
   }, [inView]);
 
   return (
-    <section className="py-20 relative z-10" ref={ref}>
+    <section id="blueprint" className="py-20 relative z-10" ref={ref}>
       <div className="mb-12 text-center md:text-left">
         <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-4">
           The <span className="text-accent">Blueprint</span>
