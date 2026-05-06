@@ -32,7 +32,7 @@ const openSourceRepos = [
 
 export default function OpenSource() {
   return (
-    <section className="py-20 relative z-10">
+    <section id="contributions" className="py-20 relative z-10">
       <div className="mb-12 text-center md:text-left">
         <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-4">
           Open Source <span className="text-accent">Contributions</span>
