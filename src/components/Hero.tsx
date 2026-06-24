@@ -4,24 +4,24 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Terminal, Cpu, Database, Network, ChevronRight, Activity, 
-  Code2, User, ShieldCheck, Flower2, ChevronDown 
+  Code2, User, ShieldCheck, Flower2, ChevronDown, AlertTriangle 
 } from "lucide-react";
+import { useTheme } from "next-themes";
 
 export default function Hero() {
   const [isInitializing, setIsInitializing] = useState(true);
+  const [isGlitching, setIsGlitching] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   // Manage Initialization, Scroll Locking, and Force-to-Top
   useEffect(() => {
-    // 1. Force the page to scroll to the top immediately on refresh/reload
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }
     window.scrollTo(0, 0);
 
-    // 2. Prevent scrolling and interaction while booting
     document.body.style.overflow = "hidden";
     
-    // 3. Unlock after 3 seconds (giving the Identity Card time to finish animating)
     const timer = setTimeout(() => {
       setIsInitializing(false);
       document.body.style.overflow = "";
@@ -32,6 +32,19 @@ export default function Hero() {
       document.body.style.overflow = "";
     };
   }, []);
+
+  // Intense Glitch Theme Swap Handler
+  const handleSystemReboot = () => {
+    if (isGlitching) return; // Prevent spam clicking
+
+    setIsGlitching(true);
+    
+    // Extended delay to 1 full second for a violent glitch effect
+    setTimeout(() => {
+      setTheme(theme === "dark" ? "light" : "dark");
+      setIsGlitching(false);
+    }, 1000); // 1000ms glitch duration
+  };
 
   // Smooth scroll handler for the bounce arrow
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -51,19 +64,17 @@ export default function Hero() {
             initial={{ opacity: 1 }}
             exit={{ opacity: 0, y: "-100%" }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            // Tweaked translucency: lower background opacity, medium blur for frosted glass look
             className="fixed inset-0 z-[9999] bg-background/10 backdrop-blur-md flex flex-col items-center justify-center pointer-events-auto"
           >
             {/* Developer Identity Card */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              className="w-full max-w-md p-8 rounded-[2rem] bg-card/80 backdrop-blur-xl border border-accent/30 shadow-[0_20px_50px_-15px_rgba(216,17,89,0.3)] relative overflow-hidden"
+              className="w-full max-w-md p-8 rounded-[2rem] bg-card/80 backdrop-blur-xl border border-accent/30 shadow-[0_20px_50px_-15px_rgba(216,17,89,0.3)] dark:shadow-[0_20px_50px_-15px_rgba(255,128,171,0.2)] relative overflow-hidden"
             >
-              {/* Soft glowing background orb inside the card */}
               <div className="absolute top-0 right-0 -mt-10 -mr-10 w-32 h-32 bg-accent/20 blur-[40px] rounded-full pointer-events-none" />
 
-              <div className="flex items-center gap-3 mb-8 border-b border-[#ffb3c6]/40 pb-4">
+              <div className="flex items-center gap-3 mb-8 border-b border-[#ffb3c6]/40 dark:border-accent/20 pb-4">
                 <Terminal className="w-6 h-6 text-accent" />
                 <motion.span 
                   initial={{ opacity: 0 }}
@@ -75,40 +86,23 @@ export default function Hero() {
               </div>
 
               <div className="space-y-5 font-mono text-sm md:text-base">
-                {/* Name Row */}
-                <motion.div 
-                  initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 }}
-                  className="flex items-center gap-3 text-foreground"
-                >
+                <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 }} className="flex items-center gap-3 text-foreground">
                   <User className="w-5 h-5 text-accent/70" />
                   <span className="text-foreground/60">Name:</span>
                   <span className="font-bold text-accent">Jalisa Malik</span>
                 </motion.div>
 
-                {/* Role Row */}
-                <motion.div 
-                  initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.2 }}
-                  className="flex items-center gap-3 text-foreground"
-                >
+                <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.2 }} className="flex items-center gap-3 text-foreground">
                   <Code2 className="w-5 h-5 text-accent/70" />
                   <span className="text-foreground/60">Status:</span>
                   <span className="font-bold">CS Student @ Charusat</span>
                 </motion.div>
 
-                {/* Security Mode Row */}
-                <motion.div 
-                  initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.9 }}
-                  className="flex items-center gap-3 text-foreground"
-                >
+                <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.9 }} className="flex items-center gap-3 text-foreground">
                   <ShieldCheck className="w-5 h-5 text-[#6b8e23]" /> 
                   <span className="text-foreground/60">Security Mode:</span>
                   <span className="font-bold text-[#6b8e23]">Enabled</span>
-                  
-                  <motion.div 
-                    animate={{ opacity: [1, 0, 1] }} 
-                    transition={{ repeat: Infinity, duration: 0.8 }} 
-                    className="w-2 h-4 bg-accent ml-1" 
-                  />
+                  <motion.div animate={{ opacity: [1, 0, 1] }} transition={{ repeat: Infinity, duration: 0.8 }} className="w-2 h-4 bg-accent ml-1" />
                 </motion.div>
               </div>
             </motion.div>
@@ -117,9 +111,28 @@ export default function Hero() {
       </AnimatePresence>
 
       {/* ================= HERO SECTION ================= */}
-      <section className="relative min-h-[calc(100vh-100px)] w-full flex items-center justify-center z-10 overflow-hidden">
+      {/* Glitch wrap - Extreme shaking, screen tearing, and color corruption during reboot */}
+      <motion.section 
+        animate={isGlitching ? { 
+          x: [0, -15, 20, -20, 15, -10, 10, -15, 0], 
+          y: [0, 8, -12, 10, -15, 8, -10, 5, 0], 
+          skewX: [0, -10, 12, -15, 10, -5, 8, -10, 0],
+          scale: [1, 1.05, 0.95, 1.08, 0.96, 1.02, 0.98, 1.04, 1],
+          filter: [
+            "hue-rotate(0deg) invert(0%) blur(0px)", 
+            "hue-rotate(90deg) invert(20%) blur(2px)", 
+            "hue-rotate(-180deg) invert(10%) blur(1px)", 
+            "hue-rotate(270deg) invert(30%) blur(4px)", 
+            "hue-rotate(0deg) invert(0%) blur(0px)"
+          ] 
+        } : {
+          x: 0, y: 0, skewX: 0, scale: 1, filter: "hue-rotate(0deg) invert(0%) blur(0px)"
+        }}
+        transition={{ duration: 1, ease: "easeInOut" }}
+        className="relative min-h-[calc(100vh-100px)] w-full flex items-center justify-center z-10 overflow-hidden"
+      >
         
-        {/* Background Blueprint Grid - Animated to look like it is rendering during boot */}
+        {/* Background Blueprint Grid */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -134,24 +147,75 @@ export default function Hero() {
           {/* ================= LEFT COLUMN: THE NARRATIVE ================= */}
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left mt-8 lg:mt-0 relative z-20">
             
-            <motion.div
+            {/* INTERACTIVE SYS.INIT EASTER EGG CONTAINER */}
+            <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 3.1 }} // Waits for preloader to slide up
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#fff0f3] border border-[#ffb3c6]/50 text-accent font-mono text-xs md:text-sm mb-6 lg:mb-8 shadow-sm"
+              transition={{ duration: 0.5, delay: 3.1 }} 
+              className="flex flex-col items-center lg:items-start mb-6 lg:mb-8"
             >
-              <Activity className="w-4 h-4 animate-pulse" />
-              <span>SYS.INIT // JALISA_MALIK</span>
+              {/* STYLISH FLOATING HINT WITH CASCADING ARROWS */}
+              <div className="flex flex-col items-center mb-3">
+                <motion.span 
+                  animate={{ y: [0, -3, 0] }}
+                  transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
+                  className="text-[10px] md:text-xs font-mono tracking-[0.2em] font-bold uppercase text-accent/80 dark:text-accent dark:drop-shadow-[0_0_8px_rgba(255,128,171,0.8)]"
+                >
+                  Switch_Mode
+                </motion.span>
+                
+                {/* Staggered cascading arrows */}
+                <div className="flex flex-col -space-y-3 mt-1">
+                  {[0, 1, 2].map((i) => (
+                    <motion.div
+                      key={i}
+                      animate={{ 
+                        opacity: [0.2, 1, 0.2], 
+                        y: [0, 4, 0] 
+                      }}
+                      transition={{ 
+                        repeat: Infinity, 
+                        duration: 1.5, 
+                        delay: i * 0.2, // Staggers the animation to create a downward flow
+                        ease: "easeInOut" 
+                      }}
+                    >
+                      <ChevronDown className="w-3.5 h-3.5 text-accent/50 dark:text-accent/80" />
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              <button
+                onClick={handleSystemReboot}
+                className={`inline-flex items-center justify-center shrink-0 w-max min-w-[240px] md:min-w-[260px] whitespace-nowrap gap-2 px-4 py-2 rounded-full border border-accent/30 font-mono text-xs md:text-sm shadow-[0_0_10px_rgba(255,128,171,0.1)] transition-colors cursor-pointer overflow-hidden ${
+                  isGlitching 
+                    ? "bg-red-500/20 text-red-500 border-red-500" 
+                    : "bg-background text-accent hover:bg-accent/10"
+                }`}
+              >
+                {isGlitching ? (
+                  <div className="flex items-center justify-center gap-2 w-full">
+                    <AlertTriangle className="w-4 h-4 shrink-0 animate-ping" />
+                    <span className="whitespace-nowrap tracking-tight">SYSTEM_GLITCH()</span>
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-center gap-2 w-full">
+                    <Activity className="w-4 h-4 shrink-0 animate-pulse" />
+                    <span className="whitespace-nowrap tracking-tight">SYS.INIT // JALISA_MALIK</span>
+                  </div>
+                )}
+              </button>
             </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 3.2 }}
-              className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-[1.1] mb-6"
+              className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-[1.1] mb-6 drop-shadow-sm dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]"
             >
               Architecting <br className="hidden lg:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-[#ff4d6d] to-accent bg-[length:200%_auto] animate-gradient">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-[#ff4d6d] to-accent bg-[length:200%_auto] animate-gradient dark:drop-shadow-[0_0_10px_rgba(255,128,171,0.5)]">
                 Intelligent
               </span>{" "}
               Ecosystems.
@@ -161,7 +225,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 3.3 }}
-              className="text-foreground/70 text-base md:text-lg max-w-xl mb-8 lg:mb-10 leading-relaxed"
+              className="text-foreground/80 dark:text-foreground/70 text-base md:text-lg max-w-xl mb-8 lg:mb-10 leading-relaxed"
             >
               Computer Science student & Full-Stack Developer. I specialize in engineering scalable web architectures, integrating zero-trust security, and building AI-driven solutions.
             </motion.p>
@@ -174,17 +238,17 @@ export default function Hero() {
             >
               <a
                 href="#work"
-                className="flex items-center gap-2 px-6 py-3.5 bg-accent text-white font-bold rounded-xl shadow-[0_5px_15px_rgba(216,17,89,0.3)] hover:shadow-[0_5px_25px_rgba(216,17,89,0.5)] transition-all hover:-translate-y-1 group"
+                className="flex items-center gap-2 px-6 py-3.5 bg-accent text-white font-bold rounded-xl shadow-[0_5px_15px_rgba(216,17,89,0.3)] dark:shadow-[0_0_20px_rgba(255,128,171,0.4)] transition-all hover:-translate-y-1 group shrink-0"
               >
-                <Terminal className="w-4 h-4" />
-                Deploy &lt;Project /&gt;
+                <Terminal className="w-4 h-4 shrink-0" />
+                <span className="whitespace-nowrap">Deploy &lt;Project /&gt;</span>
               </a>
               <a
                 href="#blueprint"
-                className="flex items-center gap-2 px-6 py-3.5 bg-[#fff0f3] text-accent font-bold rounded-xl border border-accent/20 hover:bg-[#ffb3c6]/30 transition-all hover:-translate-y-1 group"
+                className="flex items-center gap-2 px-6 py-3.5 bg-background text-accent font-bold rounded-xl border border-accent/30 hover:bg-accent/10 transition-all hover:-translate-y-1 group shrink-0"
               >
-                init_contact()
-                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <span className="whitespace-nowrap">init_contact()</span>
+                <ChevronRight className="w-4 h-4 shrink-0 group-hover:translate-x-1 transition-transform" />
               </a>
             </motion.div>
           </div>
@@ -201,17 +265,17 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 2, delay: 3.5 }}
-              className="absolute w-72 h-72 bg-accent/20 rounded-full blur-[80px] lg:right-10" 
+              className="absolute w-72 h-72 bg-accent/20 dark:bg-accent/10 rounded-full blur-[80px] lg:right-10" 
             />
 
             {/* MAIN GLASS PANEL (System Architecture) */}
             <motion.div
               animate={{ y: [-8, 8, -8] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="relative z-20 w-full max-w-sm rounded-2xl bg-card/60 backdrop-blur-xl border border-[#ffb3c6]/40 shadow-2xl p-6 overflow-hidden"
+              className="relative z-20 w-full max-w-sm rounded-2xl bg-card/60 backdrop-blur-xl border border-accent/30 shadow-2xl dark:shadow-[0_0_30px_rgba(255,128,171,0.05)] p-6 overflow-hidden"
             >
               {/* Top Bar */}
-              <div className="flex justify-between items-center mb-6 pb-4 border-b border-[#ffb3c6]/20">
+              <div className="flex justify-between items-center mb-6 pb-4 border-b border-accent/20">
                 <div className="flex items-center gap-2 text-foreground/80">
                   <Cpu className="w-4 h-4 text-accent" />
                   <span className="font-mono text-xs font-bold tracking-wider">SYSTEM_ARCHITECTURE</span>
@@ -226,7 +290,7 @@ export default function Hero() {
               {/* Live Data Nodes */}
               <div className="space-y-5 font-mono text-xs md:text-sm">
                 <div className="flex items-start gap-3 group cursor-default">
-                  <div className="mt-0.5 p-1.5 bg-[#fff0f3] rounded-md border border-[#ffb3c6]/50 group-hover:border-accent transition-colors"><Code2 className="w-4 h-4 text-accent" /></div>
+                  <div className="mt-0.5 p-1.5 bg-background rounded-md border border-accent/30 group-hover:border-accent transition-colors"><Code2 className="w-4 h-4 text-accent" /></div>
                   <div>
                     <div className="text-foreground/50 mb-0.5 text-[10px] md:text-xs">&gt;&nbsp;Core_Engine.mount()</div>
                     <div className="text-foreground font-semibold">Next.js 16 x TypeScript</div>
@@ -234,7 +298,7 @@ export default function Hero() {
                 </div>
                 
                 <div className="flex items-start gap-3 group cursor-default">
-                  <div className="mt-0.5 p-1.5 bg-[#fff0f3] rounded-md border border-[#ffb3c6]/50 group-hover:border-accent transition-colors"><Database className="w-4 h-4 text-accent" /></div>
+                  <div className="mt-0.5 p-1.5 bg-background rounded-md border border-accent/30 group-hover:border-accent transition-colors"><Database className="w-4 h-4 text-accent" /></div>
                   <div>
                     <div className="text-foreground/50 mb-0.5 text-[10px] md:text-xs">&gt;&nbsp;AI_Subsystem.init()</div>
                     <div className="text-foreground font-semibold">Gemini Flash / LLM Prompts</div>
@@ -242,7 +306,7 @@ export default function Hero() {
                 </div>
 
                 <div className="flex items-start gap-3 group cursor-default">
-                  <div className="mt-0.5 p-1.5 bg-[#fff0f3] rounded-md border border-[#ffb3c6]/50 group-hover:border-accent transition-colors"><Network className="w-4 h-4 text-accent" /></div>
+                  <div className="mt-0.5 p-1.5 bg-background rounded-md border border-accent/30 group-hover:border-accent transition-colors"><Network className="w-4 h-4 text-accent" /></div>
                   <div>
                     <div className="text-foreground/50 mb-0.5 text-[10px] md:text-xs">&gt;&nbsp;Security_Protocol.verify()</div>
                     <div className="text-green-500 font-semibold drop-shadow-[0_0_8px_rgba(34,197,94,0.4)]">Zero-Trust Secured</div>
@@ -251,12 +315,12 @@ export default function Hero() {
               </div>
 
               {/* Compiling Bar */}
-              <div className="mt-8 pt-5 border-t border-[#ffb3c6]/20">
+              <div className="mt-8 pt-5 border-t border-accent/20">
                 <div className="flex justify-between text-[10px] mb-2 font-mono text-foreground/60 font-semibold uppercase tracking-widest">
                   <span>Compiling Future</span>
                   <span className="text-accent">99%</span>
                 </div>
-                <div className="h-1.5 w-full bg-background/80 rounded-full overflow-hidden border border-[#ffb3c6]/20">
+                <div className="h-1.5 w-full bg-background/80 rounded-full overflow-hidden border border-accent/20">
                   <motion.div
                     initial={{ width: "0%" }}
                     animate={{ width: "99%" }}
@@ -277,7 +341,7 @@ export default function Hero() {
             <motion.div
               animate={{ y: [10, -10, 10] }}
               transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-              className="absolute z-10 -right-4 -bottom-6 md:-right-8 md:-bottom-2 w-56 rounded-2xl bg-card/80 backdrop-blur-2xl border border-[#ffb3c6]/40 shadow-xl p-5 hidden sm:block"
+              className="absolute z-10 -right-4 -bottom-6 md:-right-8 md:-bottom-2 w-56 rounded-2xl bg-card/80 backdrop-blur-2xl border border-accent/30 shadow-xl dark:shadow-[0_0_20px_rgba(255,128,171,0.05)] p-5 hidden sm:block"
             >
               <div className="flex justify-between items-center mb-3">
                 <div className="text-[10px] font-mono font-bold text-foreground/60 uppercase tracking-widest">Live Metrics</div>
@@ -320,14 +384,14 @@ export default function Hero() {
             animate={{ y: [0, 10, 0] }}
             transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
           >
-            <Flower2 className="w-5 h-5 text-[#ffb3c6] mb-2 group-hover:text-accent transition-colors duration-300" />
-            <div className="p-3 bg-card/60 backdrop-blur-md rounded-full border border-[#ffb3c6]/50 shadow-sm group-hover:border-accent group-hover:shadow-[0_0_15px_rgba(216,17,89,0.3)] transition-all duration-300">
+            <Flower2 className="w-5 h-5 text-accent/60 mb-2 group-hover:text-accent transition-colors duration-300 dark:drop-shadow-[0_0_5px_rgba(255,128,171,0.8)]" />
+            <div className="p-3 bg-card/60 backdrop-blur-md rounded-full border border-accent/40 shadow-sm group-hover:border-accent group-hover:shadow-[0_0_15px_rgba(var(--accent-rgb),0.3)] transition-all duration-300">
               <ChevronDown className="w-5 h-5 text-foreground/60 group-hover:text-accent transition-colors duration-300" />
             </div>
           </motion.a>
         </motion.div>
 
-      </section>
+      </motion.section>
     </>
   );
 }

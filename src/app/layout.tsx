@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import RoseTheme from "@/components/RoseTheme";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,13 +25,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased font-[family-name:var(--font-geist-sans)]`}
       >
-        {/* The dynamic rose vines and petals will now render behind everything */}
-        <RoseTheme />
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="light">
+          {/* The dynamic rose/lily vines will render behind everything */}
+          <RoseTheme />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

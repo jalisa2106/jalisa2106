@@ -11,18 +11,17 @@ export default function About() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="p-8 md:p-12 rounded-[2.5rem] bg-card/60 backdrop-blur-md border border-[#ffb3c6]/30 shadow-[0_20px_40px_-10px_rgba(255,179,198,0.2)]"
+        className="p-8 md:p-12 rounded-[2.5rem] bg-card/60 backdrop-blur-md border border-[#ffb3c6]/30 dark:border-accent/20 shadow-[0_20px_40px_-10px_rgba(255,179,198,0.2)] dark:shadow-[0_20px_40px_-10px_rgba(255,128,171,0.05)]"
       >
         <div className="flex items-center gap-3 mb-6">
-          {/* <Sparkles className="w-8 h-8 text-accent" /> */}
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
-            About <span className="text-accent">Me</span>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground drop-shadow-sm dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+            About <span className="text-accent dark:drop-shadow-[0_0_10px_rgba(255,128,171,0.5)]">Me</span>
           </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Left Column: The Narrative (Kept exactly as it is) */}
-          <div className="space-y-6 text-lg text-foreground/80 leading-relaxed">
+          {/* Left Column: The Narrative */}
+          <div className="space-y-6 text-lg text-foreground/80 dark:text-foreground/70 leading-relaxed">
             <p>
               I am a Computer Science student at Charusat University with a deep 
               passion for bridging the gap between beautiful, minimalist aesthetics 
@@ -36,11 +35,11 @@ export default function About() {
             </p>
           </div>
 
-          {/* Right Column: Core Focus Areas (Updated to match your specific identities) */}
+          {/* Right Column: Core Focus Areas */}
           <div className="flex flex-col gap-6 justify-center">
             
-            <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#fff0f3]/50 border border-[#ffb3c6]/40 transition-transform hover:-translate-y-1 duration-200">
-              <div className="p-3 bg-white rounded-xl shadow-sm">
+            <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#fff0f3]/50 dark:bg-background/50 border border-[#ffb3c6]/40 dark:border-accent/20 transition-transform hover:-translate-y-1 duration-200">
+              <div className="p-3 bg-white dark:bg-card rounded-xl shadow-sm dark:shadow-[0_0_10px_rgba(255,128,171,0.1)]">
                 <Code2 className="w-6 h-6 text-accent" />
               </div>
               <div>
@@ -49,8 +48,8 @@ export default function About() {
               </div>
             </div>
 
-            <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#fff0f3]/50 border border-[#ffb3c6]/40 transition-transform hover:-translate-y-1 duration-200">
-              <div className="p-3 bg-white rounded-xl shadow-sm">
+            <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#fff0f3]/50 dark:bg-background/50 border border-[#ffb3c6]/40 dark:border-accent/20 transition-transform hover:-translate-y-1 duration-200">
+              <div className="p-3 bg-white dark:bg-card rounded-xl shadow-sm dark:shadow-[0_0_10px_rgba(255,128,171,0.1)]">
                 <Brain className="w-6 h-6 text-accent" />
               </div>
               <div>
@@ -59,8 +58,8 @@ export default function About() {
               </div>
             </div>
             
-            <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#fff0f3]/50 border border-[#ffb3c6]/40 transition-transform hover:-translate-y-1 duration-200">
-              <div className="p-3 bg-white rounded-xl shadow-sm">
+            <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#fff0f3]/50 dark:bg-background/50 border border-[#ffb3c6]/40 dark:border-accent/20 transition-transform hover:-translate-y-1 duration-200">
+              <div className="p-3 bg-white dark:bg-card rounded-xl shadow-sm dark:shadow-[0_0_10px_rgba(255,128,171,0.1)]">
                 <ShieldCheck className="w-6 h-6 text-accent" />
               </div>
               <div>

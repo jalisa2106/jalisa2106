@@ -9,11 +9,19 @@
 
 @layer base {
   :root {
-    /* The Soft, Girlish "Rose" Theme */
-    --background: #fff0f3; /* Very soft blush pink */
-    --foreground: #5d2a33; /* Deep maroon for readable text */
-    --card: #ffffff;       /* Pure white for floating cards */
-    --accent: #d81159;     /* Vibrant maroon/rose accent for buttons */
+    /* The Soft, Girlish "Rose" Theme (Light Mode) */
+    --background: #fff0f3; 
+    --foreground: #5d2a33; 
+    --card: #ffffff;       
+    --accent: #d81159;     
+  }
+
+  /* The "Bioluminescent Midnight" Theme (Dark Mode) */
+  .dark {
+    --background: #0B070E; /* Deep midnight plum/black */
+    --foreground: #F8F9FA; /* Soft misty white */
+    --card: #1A1016;       /* Slightly lighter dark for floating cards */
+    --accent: #FF80AB;     /* Glowing Baby Pink */
   }
 
   * {
@@ -29,7 +37,7 @@
     transition: background-color 0.5s ease, color 0.5s ease;
   }
 
-  /* Soft Pink Scrollbar */
+  /* Soft Pink / Glowing Scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
   }
@@ -39,16 +47,17 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #ffb3c6; /* Soft pink scrollbar */
+    background: var(--accent); /* Adapts to dark mode automatically */
     border-radius: 10px;
+    opacity: 0.7;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #880d1e; /* Maroon on hover */
+    background: #880d1e; 
   }
 }
 
 ::selection {
-  background-color: #ffb3c6;
-  color: #5d2a33;
+  background-color: var(--accent);
+  color: var(--background);
 }
