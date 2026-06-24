@@ -56,7 +56,6 @@ I am a Computer Science student at **Charusat University** with a passion for bu
 | Project | Description | Link |
 | :--- | :--- | :--- |
 | **ARCADE** | A dynamic, role-based access control university hub application. | [View Repository](https://github.com/jalisa2106/arcade) |
-| **Crochet Showcase** | A specialized portfolio website designed to feature custom crochet handiwork. | 🏗️ Developing |
 
 ---
 
