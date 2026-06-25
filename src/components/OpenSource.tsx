@@ -5,82 +5,99 @@ import { FolderGit2, ArrowUpRight } from "lucide-react";
 
 const openSourceRepos = [
   { 
-    name: "Zaplink_frontend", 
-    url: "https://github.com/Sp2736/Zaplink_frontend", 
-    desc: "Frontend architecture and UI ecosystem for the Zaplink platform.",
-    tech: ["Frontend", "UI/UX"]
-  },
-  { 
-    name: "keploy", 
-    url: "https://github.com/Sp2736/keploy", 
-    desc: "Contributions to Keploy, a powerful open-source API testing platform.",
-    tech: ["Testing", "Open Source"]
-  },
-  { 
-    name: "CareXpert_frontend", 
-    url: "https://github.com/Sp2736/CareXpert_frontend", 
-    desc: "The client-facing interface and dashboard ecosystem for CareXpert.",
-    tech: ["Next.js", "Client"]
-  },
-  { 
-    name: "CareXpert_backend", 
-    url: "https://github.com/Sp2736/CareXpert_backend", 
-    desc: "Robust API, auth, and database architecture powering CareXpert.",
-    tech: ["Node.js", "API"]
+    name: "GSSoC '26: CommitPulse", 
+    url: "https://github.com/jalisa2106/commitpulse/",
+    desc: "Transforming raw GitHub data into dynamic, cinematic SVG visualizations. Optimized rendering pipelines and maintained rigorous open-source CI/CD workflows.",
+    tech: ["Next.js", "React", "Tailwind CSS"],
+    date: "May 2026 – Present"
   }
 ];
 
+// 1. Define the Parent Container Animation
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15, 
+    },
+  },
+};
+
+// 2. Define the Individual Card Animation
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 0.5, ease: "easeOut" } 
+  },
+};
+
 export default function OpenSource() {
   return (
-    <section id="contributions" className="py-20 relative z-10">
-      <div className="mb-12 text-center md:text-left">
-        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-4">
-          Open Source <span className="text-accent">Contributions</span>
+    // Added scroll-mt-32 to prevent the fixed navbar from overlapping this section when clicked
+    <section id="contributions" className="py-20 relative z-10 scroll-mt-32">
+      <div className="mb-12 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground drop-shadow-sm dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] mb-4">
+          Open Source <span className="text-accent dark:drop-shadow-[0_0_10px_rgba(255,128,171,0.5)]">Contributions</span>
         </h2>
-        <p className="text-foreground/70 max-w-2xl text-lg">
+        <p className="text-foreground/70 dark:text-foreground/60 max-w-2xl mx-auto text-lg">
           Collaborative engineering and team-driven architecture.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {openSourceRepos.map((repo, idx) => (
+      {/* PARENT GRID: Changed to a single column, centered layout to fix the empty space */}
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-50px" }}
+        className="max-w-3xl mx-auto grid grid-cols-1"
+      >
+        {openSourceRepos.map((repo) => (
           <motion.a
             href={repo.url}
             target="_blank"
             rel="noopener noreferrer"
             key={repo.name}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: idx * 0.1, duration: 0.5 }}
-            className="group relative p-6 rounded-3xl bg-card/60 backdrop-blur-md border border-[#ffb3c6]/40 shadow-sm hover:shadow-[0_15px_35px_-10px_rgba(216,17,89,0.2)] hover:border-accent/60 transition-all duration-300 overflow-hidden block"
+            variants={cardVariants} 
+            className="group relative p-8 md:p-10 rounded-3xl bg-card/60 backdrop-blur-md border border-[#ffb3c6]/40 dark:border-accent/20 shadow-sm hover:shadow-[0_15px_35px_-10px_rgba(216,17,89,0.2)] dark:hover:shadow-[0_15px_35px_-10px_rgba(255,128,171,0.1)] hover:border-accent/60 dark:hover:border-accent/40 transition-all duration-300 overflow-hidden block"
           >
-            <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-3xl group-hover:bg-accent/15 transition-colors duration-500 pointer-events-none" />
+            <div className="absolute top-0 right-0 w-48 h-48 bg-accent/5 dark:bg-accent/10 rounded-full blur-3xl group-hover:bg-accent/15 dark:group-hover:bg-accent/20 transition-colors duration-500 pointer-events-none" />
             
-            <div className="flex items-start justify-between mb-4 relative z-10">
-              <div className="p-3 bg-[#fff0f3] text-accent rounded-xl">
-                <FolderGit2 className="w-6 h-6" />
+            <div className="flex items-start justify-between mb-6 relative z-10">
+              <div className="p-4 bg-[#fff0f3] dark:bg-background/80 text-accent rounded-xl border border-transparent dark:border-accent/10">
+                <FolderGit2 className="w-8 h-8" />
               </div>
-              <ArrowUpRight className="w-5 h-5 text-foreground/40 group-hover:text-accent transition-colors" />
+              
+              <div className="flex items-center gap-3">
+                {repo.date && (
+                  <span className="text-xs md:text-sm font-mono font-semibold text-accent/80 dark:text-accent/60 tracking-wider">
+                    {repo.date}
+                  </span>
+                )}
+                <ArrowUpRight className="w-6 h-6 text-foreground/40 dark:text-foreground/30 group-hover:text-accent transition-colors" />
+              </div>
             </div>
 
-            <h3 className="text-xl font-bold text-foreground mb-2 relative z-10 group-hover:text-accent transition-colors">
+            <h3 className="text-2xl font-bold text-foreground mb-3 relative z-10 group-hover:text-accent transition-colors">
               {repo.name}
             </h3>
-            <p className="text-foreground/70 text-sm mb-6 leading-relaxed relative z-10">
+            <p className="text-foreground/70 dark:text-foreground/60 text-base md:text-lg mb-8 leading-relaxed relative z-10">
               {repo.desc}
             </p>
 
-            <div className="flex gap-2 relative z-10">
+            <div className="flex gap-3 relative z-10 flex-wrap">
               {repo.tech.map(tech => (
-                <span key={tech} className="px-3 py-1 text-xs font-semibold bg-background/50 border border-[#ffb3c6]/40 text-foreground/80 rounded-full">
+                <span key={tech} className="px-4 py-1.5 text-xs md:text-sm font-semibold bg-background/50 dark:bg-card/50 border border-[#ffb3c6]/40 dark:border-accent/20 text-foreground/80 dark:text-foreground/70 rounded-full">
                   {tech}
                 </span>
               ))}
             </div>
           </motion.a>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }
