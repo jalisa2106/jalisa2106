@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { FolderGit2, ArrowUpRight } from "lucide-react";
 
 const openSourceRepos = [
@@ -13,8 +13,8 @@ const openSourceRepos = [
   }
 ];
 
-// 1. Define the Parent Container Animation
-const containerVariants = {
+// 1. Explicitly type as Variants to keep TypeScript happy
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
@@ -24,19 +24,21 @@ const containerVariants = {
   },
 };
 
-// 2. Define the Individual Card Animation
-const cardVariants = {
+// 2. Explicitly type as Variants and use an array or literal assertion for easing
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   show: { 
     opacity: 1, 
     y: 0, 
-    transition: { duration: 0.5, ease: "easeOut" } 
+    transition: { 
+      duration: 0.5, 
+      ease: [0.22, 1, 0.36, 1] // Custom smooth ease-out bezier curve that passes strict types perfectly
+    } 
   },
 };
 
 export default function OpenSource() {
   return (
-    // Added scroll-mt-32 to prevent the fixed navbar from overlapping this section when clicked
     <section id="contributions" className="py-20 relative z-10 scroll-mt-32">
       <div className="mb-12 text-center">
         <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground drop-shadow-sm dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] mb-4">
@@ -47,7 +49,6 @@ export default function OpenSource() {
         </p>
       </div>
 
-      {/* PARENT GRID: Changed to a single column, centered layout to fix the empty space */}
       <motion.div 
         variants={containerVariants}
         initial="hidden"
@@ -62,7 +63,7 @@ export default function OpenSource() {
             rel="noopener noreferrer"
             key={repo.name}
             variants={cardVariants} 
-            className="group relative p-8 md:p-10 rounded-3xl bg-card/60 backdrop-blur-md border border-[#ffb3c6]/40 dark:border-accent/20 shadow-sm hover:shadow-[0_15px_35px_-10px_rgba(216,17,89,0.2)] dark:hover:shadow-[0_15px_35px_-10px_rgba(255,128,171,0.1)] hover:border-accent/60 dark:hover:border-accent/40 transition-all duration-300 overflow-hidden block"
+            className="group relative p-6 rounded-3xl bg-card/60 backdrop-blur-md border border-[#ffb3c6]/40 dark:border-accent/20 shadow-sm hover:shadow-[0_15px_35px_-10px_rgba(216,17,89,0.2)] dark:hover:shadow-[0_15px_35px_-10px_rgba(255,128,171,0.1)] hover:border-accent/60 dark:hover:border-accent/40 transition-all duration-300 overflow-hidden block"
           >
             <div className="absolute top-0 right-0 w-48 h-48 bg-accent/5 dark:bg-accent/10 rounded-full blur-3xl group-hover:bg-accent/15 dark:group-hover:bg-accent/20 transition-colors duration-500 pointer-events-none" />
             
