@@ -3,7 +3,6 @@
 import { useState, useEffect, ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Github,
   ExternalLink,
   Code,
   GraduationCap,
@@ -11,6 +10,8 @@ import {
   X,
   Repeat,
   Cpu,
+  Brain,
+  LineChart
 } from "lucide-react";
 
 type Project = {
@@ -20,13 +21,29 @@ type Project = {
   problem: string;
   solution: string;
   tags: string[];
-  github: string;
   status?: string;
   live?: string;
   architecture?: string;
 };
 
 const projects: Project[] = [
+  {
+    id: "smartbi",
+    title: "SmartBI",
+    icon: <LineChart className="w-10 h-10 text-[#d81159]" />,
+    problem:
+      "Businesses lacking dedicated data science teams struggle to perform complex analytics, forecast trends, and extract actionable insights from their raw data.",
+    solution:
+      "Architecting a 14-module BI platform across a 5-layer pipeline. Building forecasting engines (Prophet, ARIMA, LSTM), anomaly detection, customer segmentation, and an LLM-driven natural-language query interface.",
+    tags: [
+      "Next.js & Node.js", 
+      "Python & PostgreSQL", 
+      "Redis", 
+      "Prophet & ARIMA", 
+      "LSTM & K-Means"
+    ],
+    architecture: "/architecture/smartbi.html",
+  },
   {
     id: "byteback",
     title: "ByteBack",
@@ -43,8 +60,23 @@ const projects: Project[] = [
       "Serverless Auth",
       "BYOK Architecture",
     ],
-    github: "https://github.com/Sp2736/ByteBack",
     live: "https://byte-back.vercel.app",
+  },
+  {
+    id: "swot-analysis",
+    title: "AI SWOT System",
+    icon: <Brain className="w-10 h-10 text-[#d81159]" />,
+    problem:
+      "Manual student counseling and performance evaluation is highly time-consuming, subjective, and difficult to scale across hundreds of structured academic records.",
+    solution:
+      "Architected an AI evaluation engine processing 100+ structured student records into actionable insights, risk scores, and recommendations — cutting manual counseling effort by ~60% via automated, prompt-driven scoring pipelines.",
+    tags: [
+      "Python", 
+      "LLM APIs", 
+      "Prompt Engineering", 
+      "Data Pipelines"
+    ],
+    architecture: "/architecture/swot.html",
   },
   {
     id: "skeleton-api",
@@ -55,7 +87,6 @@ const projects: Project[] = [
     solution:
       "Built a Microsoft Edge extension functioning as an API Intelligence Tool, instantly auto-generating TypeScript interfaces directly from live responses.",
     tags: ["Edge Extension", "TypeScript", "API Intelligence", "Automation"],
-    github: "https://github.com/jalisa2106/Skeleton-API",
     live: "https://microsoftedge.microsoft.com/addons/detail/jjjfflokojljcagdnfgmeibojganklgb",
   },
   {
@@ -73,7 +104,6 @@ const projects: Project[] = [
       "Framer Motion",
       "Team Collaboration",
     ],
-    github: "https://github.com/Sp2736/arcade.git",
     architecture: "/architecture/arcade.html",
   },
   {
@@ -85,7 +115,6 @@ const projects: Project[] = [
     solution:
       "Designed an immersive, interactive destination guide featuring clean, responsive layouts, modern UI/UX principles, and seamless navigation entirely from scratch.",
     tags: ["HTML5", "CSS3", "JavaScript", "UI/UX Design"],
-    github: "https://github.com/jalisa2106/Greece-Explorer.git",
   },
 ];
 
@@ -190,7 +219,6 @@ export default function PetalProjects() {
 
             <motion.div
               layoutId={`card-${selectedProject.id}`}
-              // Increased height slightly to prevent any potential overflow
               className="relative w-full max-w-2xl h-[580px] z-10"
               style={{ borderRadius: "2.5rem" }}
             >
@@ -221,7 +249,6 @@ export default function PetalProjects() {
                     <X className="w-5 h-5" />
                   </button>
 
-                  {/* Reduced p-12 to p-10 to give more internal vertical space */}
                   <div className="p-8 md:p-10 flex flex-col h-full">
                     <div className="flex items-center gap-4 mb-6">
                       <motion.div
@@ -238,7 +265,6 @@ export default function PetalProjects() {
                       </motion.h3>
                     </div>
 
-                    {/* Reduced mb-8 to mb-4 to stop it from pushing against the footer */}
                     <div className="space-y-5 mb-4 flex-grow overflow-y-auto pr-2 custom-scrollbar">
                       <motion.div
                         initial={{ opacity: 0, y: 10 }}
@@ -279,38 +305,24 @@ export default function PetalProjects() {
                         View Tech Stack
                       </button>
 
-                      {/* Responsive Action Buttons with Status Indicator logic */}
+                      {/* Action Links Tray */}
                       <div className="flex gap-2 md:gap-3 items-center justify-end">
-                        <a
-                          href={selectedProject.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center justify-center w-10 h-10 md:w-auto md:h-auto md:px-4 md:py-2 bg-foreground text-background font-semibold rounded-full hover:bg-accent hover:text-white transition-colors"
-                        >
-                          <Github className="w-4 h-4" />
-                          <span className="hidden md:inline ml-2 text-sm">
-                            Code
-                          </span>
-                        </a>
-
-                        {/* ONLY render this block if there is architecture html file present */}
                         {selectedProject.architecture && (
                           <div className="flex items-center gap-2">
                             <a
-                                href={selectedProject.architecture}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center justify-center w-10 h-10 md:w-auto md:h-auto md:px-4 md:py-2 bg-[#fff0f3] text-accent font-semibold rounded-full border border-[#ffb3c6]/50 hover:bg-accent hover:text-white transition-colors"
-                              >
-                                <ExternalLink className="w-4 h-4" />
-                                <span className="hidden md:inline ml-2 text-sm">
-                                  Architecture
-                                </span>
-                              </a>
+                              href={selectedProject.architecture}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center justify-center w-10 h-10 md:w-auto md:h-auto md:px-4 md:py-2 bg-[#fff0f3] text-accent font-semibold rounded-full border border-[#ffb3c6]/50 hover:bg-accent hover:text-white transition-colors"
+                            >
+                              <ExternalLink className="w-4 h-4" />
+                              <span className="hidden md:inline ml-2 text-sm">
+                                Architecture
+                              </span>
+                            </a>
                           </div>
                         )}
 
-                        {/* ONLY render this block if a status or live link exists */}
                         {(selectedProject.status || selectedProject.live) && (
                           <div className="flex items-center gap-2">
                             {selectedProject.status ? (
