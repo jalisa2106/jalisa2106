@@ -146,7 +146,7 @@ export default function ArchitectBlueprint() {
             <a href="https://github.com/jalisa2106" target="_blank" rel="noopener noreferrer" className="p-3 bg-background rounded-full border border-[#ffb3c6]/40 text-foreground hover:bg-accent hover:text-white transition-all shadow-sm hover:shadow-[0_0_15px_rgba(216,17,89,0.3)]">
               <Github className="w-5 h-5" />
             </a>
-            <a href="https://www.linkedin.com/in/jalisa-malik-8b0308333?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" className="p-3 bg-background rounded-full border border-[#ffb3c6]/40 text-foreground hover:bg-accent hover:text-white transition-all shadow-sm hover:shadow-[0_0_15px_rgba(216,17,89,0.3)]">
+            <a href="https://www.linkedin.com/in/jalisa-malik/" target="_blank" rel="noopener noreferrer" className="p-3 bg-background rounded-full border border-[#ffb3c6]/40 text-foreground hover:bg-accent hover:text-white transition-all shadow-sm hover:shadow-[0_0_15px_rgba(216,17,89,0.3)]">
               <Linkedin className="w-5 h-5" />
             </a>
             <a href="mailto:jalisamalik21.email@example.com" className="flex items-center gap-2 px-6 py-3 bg-accent text-white font-bold rounded-full shadow-[0_5px_15px_rgba(216,17,89,0.3)] hover:shadow-[0_5px_25px_rgba(216,17,89,0.5)] transition-all hover:-translate-y-0.5">

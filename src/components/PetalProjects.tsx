@@ -10,7 +10,7 @@ import {
   Map,
   X,
   Repeat,
-  Cpu 
+  Cpu,
 } from "lucide-react";
 
 type Project = {
@@ -23,6 +23,7 @@ type Project = {
   github: string;
   status?: string;
   live?: string;
+  architecture?: string;
 };
 
 const projects: Project[] = [
@@ -40,9 +41,9 @@ const projects: Project[] = [
       "Tailwind CSS",
       "Gemini SDK",
       "Serverless Auth",
-      "BYOK Architecture"
+      "BYOK Architecture",
     ],
-    github: "https://github.com/Sp2736/ByteBack", 
+    github: "https://github.com/Sp2736/ByteBack",
     live: "https://byte-back.vercel.app",
   },
   {
@@ -55,7 +56,7 @@ const projects: Project[] = [
       "Built a Microsoft Edge extension functioning as an API Intelligence Tool, instantly auto-generating TypeScript interfaces directly from live responses.",
     tags: ["Edge Extension", "TypeScript", "API Intelligence", "Automation"],
     github: "https://github.com/jalisa2106/Skeleton-API",
-    live: "https://microsoftedge.microsoft.com/addons/detail/jjjfflokojljcagdnfgmeibojganklgb", 
+    live: "https://microsoftedge.microsoft.com/addons/detail/jjjfflokojljcagdnfgmeibojganklgb",
   },
   {
     id: "arcade",
@@ -73,7 +74,7 @@ const projects: Project[] = [
       "Team Collaboration",
     ],
     github: "https://github.com/Sp2736/arcade.git",
-    status: "Work in Progress",
+    architecture: "/architecture/arcade.html",
   },
   {
     id: "greece-explorer",
@@ -292,6 +293,23 @@ export default function PetalProjects() {
                           </span>
                         </a>
 
+                        {/* ONLY render this block if there is architecture html file present */}
+                        {selectedProject.architecture && (
+                          <div className="flex items-center gap-2">
+                            <a
+                                href={selectedProject.architecture}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center justify-center w-10 h-10 md:w-auto md:h-auto md:px-4 md:py-2 bg-[#fff0f3] text-accent font-semibold rounded-full border border-[#ffb3c6]/50 hover:bg-accent hover:text-white transition-colors"
+                              >
+                                <ExternalLink className="w-4 h-4" />
+                                <span className="hidden md:inline ml-2 text-sm">
+                                  Architecture
+                                </span>
+                              </a>
+                          </div>
+                        )}
+
                         {/* ONLY render this block if a status or live link exists */}
                         {(selectedProject.status || selectedProject.live) && (
                           <div className="flex items-center gap-2">
@@ -414,7 +432,7 @@ export default function PetalProjects() {
                               className={`absolute -translate-y-1/2 flex z-10 ${node.isRightSide ? "justify-start" : "justify-end"}`}
                               style={{
                                 top: `${node.y}%`,
-                                transform: "translateZ(1px)", 
+                                transform: "translateZ(1px)",
                                 ...(node.isRightSide
                                   ? {
                                       left: `calc(${node.x}% + 1.25rem)`,

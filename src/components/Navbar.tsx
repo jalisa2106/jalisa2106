@@ -74,7 +74,7 @@ const Navbar = () => {
           <a href="https://github.com/jalisa2106" target="_blank" rel="noreferrer" className="text-foreground/70 hover:text-accent dark:hover:drop-shadow-[0_0_5px_rgba(255,128,171,0.5)] transition-colors">
             <Github size={18} />
           </a>
-          <a href="https://www.linkedin.com/in/jalisa-malik-8b0308333?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noreferrer" className="text-foreground/70 hover:text-accent dark:hover:drop-shadow-[0_0_5px_rgba(255,128,171,0.5)] transition-colors">
+          <a href="https://www.linkedin.com/in/jalisa-malik/" target="_blank" rel="noreferrer" className="text-foreground/70 hover:text-accent dark:hover:drop-shadow-[0_0_5px_rgba(255,128,171,0.5)] transition-colors">
             <Linkedin size={18} />
           </a>
           <a href="mailto:jalisamalik21@email.com" className="text-foreground/70 hover:text-accent dark:hover:drop-shadow-[0_0_5px_rgba(255,128,171,0.5)] transition-colors">
