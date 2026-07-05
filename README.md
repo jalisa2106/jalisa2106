@@ -11,12 +11,12 @@
 
 ### About Me
 
-I am a Computer Science student at **Charusat University** with a passion for building robust full-stack applications and exploring the potential of Artificial Intelligence. My journey involves a mix of developing intelligent systems, analyzing data patterns, and understanding the foundations of secure infrastructure.
+I am a Computer Science student at Charusat University with a passion for Applied AI and seamlessly integrating intelligent data systems into modern web architectures. My journey is focused on moving beyond traditional web development to build platforms where modern frontend and backend technologies serve AI-driven solutions.
 
-* **Current Focus:** Mastering Data Mining, Algorithms, Computer Architecture, and enterprise-level software engineering.
-* **Interests:** Full-Stack Development (Next.js/React), AI/ML/Deep Learning, Data Science, and Cyber Security.
+* **Current Focus:** Building AI-integrated full-stack applications (utilizing Next.js, TypeScript, Node.js, and MongoDB), mastering Data Mining and Algorithms, and designing intuitive, minimalist user interfaces.
+* **Interests:** Artificial Intelligence, Machine Learning, Deep Learning, Data Science, and Cyber Security.
 * **Environments:** Highly adaptable across Microsoft Windows 11 and Ubuntu.
-* **Vision:** Bridging the gap between intelligent AI models and secure, scalable web architectures while creating intuitive visual learning tools.
+* **Vision:** Bridging the gap between intelligent data models and scalable web applications, delivering solutions that are functionally robust, secure, and visually aesthetic.
 
 ---
 
@@ -63,9 +63,8 @@ I am a Computer Science student at **Charusat University** with a passion for bu
 
 * **Google Certifications:** AI Essentials, Prompting Essentials, People Management, Stakeholder Management.
 * **Meta:** Full-Stack Development (Frontend, JS, Version Control, HTML/CSS, DBMS).
-* **IBM:** Data Science Specialization.
-* **Core Engineering:** Object-Oriented Hierarchies in Java, C Programming & Assembly Language, Programming in Modern C++.
-* **Events & Hackathons:** ThinkX Hackathon, Codequest 2025, and AWS Cloud Club.
+* **Core Engineering:** Object-Oriented Hierarchies in Java, C Programming, Programming in Modern C++.
+* **Events & Hackathons:** Codequest 2025 and GDG Sprintathon.
 
 ---
 
