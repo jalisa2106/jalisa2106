@@ -3,7 +3,7 @@
 
 <p align="center">
   <a href="https://github.com/jalisa2106">
-    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=22&pause=1000&color=61DAFB&center=true&vCenter=true&width=600&lines=Full-Stack+Web+Development;AI,+ML+%26+Deep+Learning;Generative+AI+Solutions;Data+Science;System+Analysis+%26+Design" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=22&pause=1000&color=61DAFB&center=true&vCenter=true&width=600&lines=Full-Stack+Development;AI,+ML+%26+Deep+Learning;Generative+AI+Solutions;Data+Science;System+Analysis+%26+Design" alt="Typing SVG" />
   </a>
 </p>
 
