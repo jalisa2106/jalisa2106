@@ -51,14 +51,6 @@ I am a Computer Science student at Charusat University with a passion for Applie
 
 ---
 
-### Featured Projects
-
-| Project | Description | Link |
-| :--- | :--- | :--- |
-| **ARCADE** | A dynamic, role-based access control university hub application. | [View Repository](https://github.com/jalisa2106/arcade) |
-
----
-
 ### Certifications & Professional Development
 
 * **Google Certifications:** AI Essentials, Prompting Essentials, People Management, Stakeholder Management.
