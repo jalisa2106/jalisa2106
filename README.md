@@ -1,9 +1,9 @@
-<h1 align="center">Jalisa Malik</h1>
-<h3 align="center">Full-Stack Developer | AI/ML Enthusiast | Data Science & Cyber Security Explorer</h3>
+<h1 align="center">Jalisabanu Malik</h1>
+<h3 align="center">Applied AI & Data Engineering | Modern Web Architect</h3>
 
 <p align="center">
   <a href="https://github.com/jalisa2106">
-    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=22&pause=1000&color=61DAFB&center=true&vCenter=true&width=600&lines=Full-Stack+Development;AI,+ML+%26+Deep+Learning;Generative+AI+Solutions;Data+Science;System+Analysis+%26+Design" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=22&pause=1000&color=61DAFB&center=true&vCenter=true&width=600&lines=Applied+AI+%26+Data+Engineering;Machine+Learning+%26+Deep+Learning;Generative+AI+Solutions;System+Analysis+%26+Design" alt="Typing SVG" />
   </a>
 </p>
 
@@ -11,12 +11,25 @@
 
 ### About Me
 
-I am a Computer Science student at Charusat University with a passion for Applied AI and seamlessly integrating intelligent data systems into modern web architectures. My journey is focused on moving beyond traditional web development to build platforms where modern frontend and backend technologies serve AI-driven solutions.
+I am a Computer Science and Engineering student at Charusat University with a passion for Applied AI and seamlessly integrating intelligent data systems into modern web architectures. My journey is focused on moving beyond traditional web development to engineer platforms where data automation and modern technologies serve AI-driven solutions.
 
-* **Current Focus:** Building AI-integrated full-stack applications (utilizing Next.js, TypeScript, Node.js, and MongoDB), mastering Data Mining and Algorithms, and designing intuitive, minimalist user interfaces.
-* **Interests:** Artificial Intelligence, Machine Learning, Deep Learning, Data Science, and Cyber Security.
+* **Current Focus:** Building AI-integrated applications (utilizing Next.js, TypeScript, Node.js, and MongoDB), mastering Data Mining and Algorithms, and designing intuitive, minimalist user interfaces.
+* **Interests:** Artificial Intelligence, Machine Learning, Deep Learning, Data Science, and Data Engineering.
 * **Environments:** Highly adaptable across Microsoft Windows 11 and Ubuntu.
 * **Vision:** Bridging the gap between intelligent data models and scalable web applications, delivering solutions that are functionally robust, secure, and visually aesthetic.
+
+---
+
+### Featured Projects
+
+* **[ByteBack](https://github.com/jalisa2106/ByteBack)** — *AI-Powered Code Review Web Application*
+  Engineered a client-side serverless application deployed on Vercel, utilizing Next.js and the Gemini SDK for rapid, automated code analysis during development sprints. 
+* **[Skeleton API](https://github.com/jalisa2106/Skeleton-API)** — *Browser Extension*
+  Developed, styled, and successfully published a deep JSON-to-TypeScript inference tool, currently available on the Microsoft Edge Add-ons Store.
+* **[ARCADE](https://github.com/jalisa2106/arcade)** — *Academic Management Platform*
+  Collaborated on a role-based academic system, leading the transition of the database architecture to MongoDB and engineering the backend API chat routing.
+* **Greece Travel Guide** — *Frontend Architecture*
+  Designed and built a comprehensive 11-page front-end web development milestone project showcasing modern layout techniques and UI design.
 
 ---
 
