@@ -62,6 +62,7 @@ const hackathons: Hackathon[] = [
       "Zod",
     ],
     caseStudy: "/architecture/assetflow.html",
+    repo: "https://github.com/jalisa2106/asset-flow",
   },
 ];
 
