@@ -32,8 +32,10 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "About", href: "#about" },
+    { name: "Experience", href: "#experience" },
     { name: "Skills", href: "#skills" },
     { name: "Work", href: "#work" },
+    { name: "Hackathons", href: "#hackathons" },
     { name: "Contributions", href: "#contributions" },
     { name: "Certifications", href: "#certifications" },
   ];
@@ -45,7 +47,7 @@ const Navbar = () => {
       transition={{ duration: 0.8, ease: "easeOut", delay: 3.5 }} // Delays navbar appearance until preloader finishes
       className="fixed top-6 inset-x-0 z-50 flex justify-center px-6"
     >
-      <div className="flex items-center justify-between w-full max-w-2xl px-6 py-3 bg-card/60 backdrop-blur-md border border-[#ffb3c6]/40 dark:border-accent/20 rounded-full shadow-[0_8px_30px_rgb(255,179,198,0.3)] dark:shadow-[0_8px_30px_rgba(255,128,171,0.1)]">
+      <div className="flex items-center justify-between w-full max-w-4xl px-6 py-3 bg-card/60 backdrop-blur-md border border-[#ffb3c6]/40 dark:border-accent/20 rounded-full shadow-[0_8px_30px_rgb(255,179,198,0.3)] dark:shadow-[0_8px_30px_rgba(255,128,171,0.1)]">
         
         {/* Logo */}
         <span className="text-xl font-bold tracking-tighter text-foreground drop-shadow-sm dark:drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]">
@@ -53,7 +55,7 @@ const Navbar = () => {
         </span>
 
         {/* Navigation Links */}
-        <div className="hidden md:flex items-center gap-6 text-sm font-semibold">
+        <div className="hidden lg:flex items-center gap-5 text-sm font-semibold">
           {navLinks.map((link) => (
             <a
               key={link.name}

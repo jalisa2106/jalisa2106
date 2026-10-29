@@ -11,7 +11,7 @@ import {
   Repeat,
   Cpu,
   Brain,
-  LineChart
+  Network,
 } from "lucide-react";
 
 type Project = {
@@ -28,22 +28,24 @@ type Project = {
 
 const projects: Project[] = [
   {
-    id: "smartbi",
-    title: "SmartBI",
-    icon: <LineChart className="w-10 h-10 text-[#d81159]" />,
+    id: "datamind",
+    title: "DataMind",
+    icon: <Network className="w-10 h-10 text-[#d81159]" />,
     problem:
-      "Businesses lacking dedicated data science teams struggle to perform complex analytics, forecast trends, and extract actionable insights from their raw data.",
+      "Exploratory data analysis is repetitive and code-heavy, while LLM-written analysis code is unreliable — it crashes, and running untrusted code is unsafe.",
     solution:
-      "Architecting a 14-module BI platform across a 5-layer pipeline. Building forecasting engines (Prophet, ARIMA, LSTM), anomaly detection, customer segmentation, and an LLM-driven natural-language query interface.",
+      "Built a full-stack multi-agent framework that orchestrates LLMs through a directed graph workflow for autonomous exploratory data analysis. Engineered a Docker-sandboxed execution environment with a self-correction code loop, real-time WebSocket telemetry, and RAG-enhanced insight generation.",
     tags: [
-      "Next.js & Node.js", 
-      "Python & PostgreSQL", 
-      "Redis", 
-      "Prophet & ARIMA", 
-      "LSTM & K-Means"
+      "FastAPI",
+      "Next.js",
+      "Docker Sandbox",
+      "WebSockets",
+      "SQLAlchemy",
+      "RAG & LLM Agents",
     ],
-    architecture: "/architecture/smartbi.html",
+    architecture: "/architecture/datamind.html",
   },
+
   {
     id: "byteback",
     title: "ByteBack",

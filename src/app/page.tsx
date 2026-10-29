@@ -1,9 +1,11 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
+import Experience from "@/components/Experience";
 import SkillsCloud from "@/components/SkillsCloud";
 // import BentoGrid from "@/components/BentoGrid";
 import PetalProjects from "@/components/PetalProjects";
+import Hackathons from "@/components/Hackathons";
 import OpenSource from "@/components/OpenSource";
 import Certifications from "@/components/Certifications";
 import ArchitectBlueprint from "@/components/ArchitectBlueprint"; // <-- Import here
@@ -17,9 +19,11 @@ export default function Home() {
       <div className="max-w-6xl mx-auto pt-20 px-6 relative z-10 flex-grow space-y-10">
         <Hero />
         <About />
+        <Experience />
         <SkillsCloud />
         {/* <Bentogrid /> */}
         <PetalProjects />
+        <Hackathons />
         <OpenSource />
         <Certifications />
         

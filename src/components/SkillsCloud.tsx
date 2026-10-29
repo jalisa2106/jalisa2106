@@ -24,6 +24,9 @@ const CATEGORIES = [
       { name: "React", icon: "https://skillicons.dev/icons?i=react", link: "https://react.dev/" },
       { name: "Next.js", icon: "https://skillicons.dev/icons?i=nextjs", link: "https://nextjs.org/" },
       { name: "Node.js", icon: "https://skillicons.dev/icons?i=nodejs", link: "https://nodejs.org/" },
+      { name: "FastAPI", icon: "https://skillicons.dev/icons?i=fastapi", link: "https://fastapi.tiangolo.com/" },
+      { name: "Tailwind CSS", icon: "https://skillicons.dev/icons?i=tailwind", link: "https://tailwindcss.com/" },
+      { name: "Prisma", icon: "https://skillicons.dev/icons?i=prisma", link: "https://www.prisma.io/" },
     ]
   },
   {
@@ -44,6 +47,7 @@ const CATEGORIES = [
     items: [
       { name: "Git", icon: "https://skillicons.dev/icons?i=git", link: "https://git-scm.com/" },
       { name: "GitHub", icon: "https://skillicons.dev/icons?i=github", link: "https://github.com/" },
+      { name: "Docker", icon: "https://skillicons.dev/icons?i=docker", link: "https://www.docker.com/" },
       { name: "n8n", icon: "https://cdn.simpleicons.org/n8n", invert: true, link: "https://n8n.io/" },
     ]
   },

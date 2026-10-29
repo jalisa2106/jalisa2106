@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lyrcon Solutions Internship — AutoNidhi Auto Finance Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0B1F3A; --navy2:#12305A; --blue:#1F5FE0; --blue-d:#1747B0; --sky:#E8F0FF; --sky2:#F4F8FF;
+  --ink:#0F2038; --slate:#55657D; --line:#DCE4F0; --bg:#F6F8FC; --card:#fff;
+  --ok:#12885B; --ok-bg:#E4F6EE; --bad:#C8384A; --bad-bg:#FCE8EB; --warn:#B7791F; --warn-bg:#FFF3D6;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace; --sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;scroll-padding-top:70px;}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{color:var(--blue-d);} code,.mono{font-family:var(--mono);font-size:.87em;}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px;}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:50;background:var(--navy);color:#fff;border-bottom:1px solid rgba(255,255,255,.08);}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding-top:11px;padding-bottom:11px;}
+.brand{font-weight:800;letter-spacing:-.01em;} .brand span{color:#7FA8FF;} .brand small{font-weight:500;font-size:11.5px;opacity:.65;margin-left:8px;}
+.top nav{display:flex;flex-wrap:wrap;gap:2px;}
+.top nav a{color:#CFDBF3;text-decoration:none;font-size:13px;font-weight:600;padding:7px 11px;border-radius:8px;}
+.top nav a:hover{background:rgba(255,255,255,.1);color:#fff;}
+
+/* hero */
+.hero{background:radial-gradient(circle at 88% 10%,rgba(31,95,224,.55),transparent 45%),linear-gradient(160deg,var(--navy),var(--navy2));color:#fff;padding:62px 0 70px;position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:38px 38px;mask-image:linear-gradient(to bottom,#000 30%,transparent);pointer-events:none;}
+.hero .wrap{position:relative;z-index:1;}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#8FB2FF;font-weight:600;}
+.hero h1{font-size:clamp(34px,5.2vw,56px);letter-spacing:-.03em;line-height:1.05;font-weight:800;margin:14px 0 16px;max-width:820px;}
+.hero p.lead{font-size:18px;color:#C7D6F2;max-width:700px;}
+.meta{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:34px;}
+@media(max-width:820px){.meta{grid-template-columns:repeat(2,1fr);}}
+.meta div{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px 16px;}
+.meta small{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:#8FB2FF;font-weight:700;}
+.meta b{font-size:15px;font-weight:700;}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;}
+.tag{font-size:12.5px;font-weight:600;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);}
+
+section{padding:60px 0 6px;}
+.sh{margin-bottom:26px;} .sh .num{font-family:var(--mono);font-size:12px;color:var(--blue);font-weight:600;letter-spacing:.08em;}
+h2{font-size:clamp(25px,3vw,32px);letter-spacing:-.02em;font-weight:800;line-height:1.15;margin:4px 0 8px;}
+.sh p{color:var(--slate);max-width:740px;}
+h3{font-size:16.5px;font-weight:700;margin-bottom:6px;}
+.grid{display:grid;gap:16px;} .g3{grid-template-columns:repeat(3,1fr);} .g2{grid-template-columns:repeat(2,1fr);} .g4{grid-template-columns:repeat(4,1fr);}
+@media(max-width:900px){.g3,.g4{grid-template-columns:repeat(2,1fr);}} @media(max-width:620px){.g3,.g2,.g4{grid-template-columns:1fr;}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 1px 2px rgba(15,32,56,.04);}
+.card p,.card li{color:var(--slate);font-size:14.3px;}
+.card ul{padding-left:18px;margin-top:6px;} .card li{margin-bottom:4px;}
+.ico{width:38px;height:38px;border-radius:11px;background:var(--sky);color:var(--blue-d);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:12px;}
+.pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:99px;}
+.pill.ok{background:var(--ok-bg);color:var(--ok);} .pill.bad{background:var(--bad-bg);color:var(--bad);} .pill.warn{background:var(--warn-bg);color:var(--warn);} .pill.info{background:var(--sky);color:var(--blue-d);}
+.note{font-size:12.5px;color:var(--slate);margin-top:12px;}
+
+/* architecture */
+.diagram{overflow-x:auto;} .diagram svg{min-width:900px;width:100%;height:auto;display:block;}
+.bx{fill:#fff;stroke:#0B1F3A;stroke-width:1.4;} .bx.a{fill:var(--sky);} .bx.n{fill:var(--navy);stroke:var(--navy);} .bx.g{fill:var(--ok-bg);} .bx.w{fill:var(--warn-bg);}
+.t1{font:700 13px Inter,sans-serif;fill:#0F2038;} .t2{font:500 11px Inter,sans-serif;fill:#55657D;} .tw{font:700 13px Inter,sans-serif;fill:#fff;} .tw2{font:500 11px Inter,sans-serif;fill:#B8CBEE;}
+.ed{stroke:#0B1F3A;stroke-width:1.4;fill:none;} .ed.b{stroke:var(--blue);stroke-dasharray:5 4;}
+
+/* tabs / role chips */
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+.chip{font-family:var(--sans);font-weight:700;font-size:13.5px;padding:9px 18px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--slate);cursor:pointer;transition:.15s;}
+.chip:hover{border-color:var(--blue);color:var(--blue-d);}
+.chip.on{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 6px 16px -6px rgba(31,95,224,.6);}
+.rolebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--sky);border:1px solid #CFE0FF;border-radius:14px;padding:12px 16px;margin-bottom:18px;}
+.rolebar b{font-size:13px;}
+
+table.m{width:100%;border-collapse:collapse;font-size:13.8px;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+table.m th{background:var(--navy);color:#fff;text-align:left;padding:11px 14px;font-size:12px;letter-spacing:.05em;text-transform:uppercase;}
+table.m td{padding:11px 14px;border-bottom:1px solid var(--line);} table.m tr:last-child td{border:none;}
+table.m td.c,table.m th.c{text-align:center;}
+table.m td.c{font-weight:700;}
+table.m .y{color:var(--ok);} table.m .n{color:#B5BFCE;}
+table.m th.hl,table.m td.hl{background:rgba(31,95,224,.08);} table.m th.hl{background:var(--blue);}
+.tscroll{overflow-x:auto;}
+
+/* pipeline */
+.flow{display:flex;gap:0;align-items:stretch;margin:6px 0 4px;overflow-x:auto;padding-bottom:6px;}
+.stage{flex:1;min-width:128px;text-align:center;padding:14px 8px 12px;position:relative;}
+.stage::before{content:'';position:absolute;top:31px;left:-50%;width:100%;height:3px;background:var(--line);z-index:0;}
+.stage:first-child::before{display:none;}
+.stage.done::before,.stage.cur::before{background:var(--blue);}
+.dot{width:34px;height:34px;border-radius:50%;background:#fff;border:3px solid var(--line);margin:0 auto 8px;position:relative;z-index:1;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--slate);}
+.stage.done .dot{background:var(--blue);border-color:var(--blue);color:#fff;}
+.stage.cur .dot{border-color:var(--blue);color:var(--blue);box-shadow:0 0 0 6px rgba(31,95,224,.15);}
+.stage.rej .dot{background:var(--bad);border-color:var(--bad);color:#fff;}
+.stage span{font-size:12.5px;font-weight:700;display:block;line-height:1.25;} .stage small{font-size:11px;color:var(--slate);}
+.acts{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0;}
+.btn{font-family:var(--sans);font-weight:700;font-size:13.5px;padding:10px 18px;border-radius:10px;border:1.5px solid var(--blue);background:var(--blue);color:#fff;cursor:pointer;transition:.15s;}
+.btn:hover{background:var(--blue-d);} .btn:disabled{opacity:.45;cursor:not-allowed;}
+.btn.o{background:#fff;color:var(--blue-d);} .btn.o:hover{background:var(--sky);}
+.btn.d{background:#fff;color:var(--bad);border-color:#EBB6BE;} .btn.d:hover{background:var(--bad-bg);}
+.two{display:grid;grid-template-columns:1.5fr 1fr;gap:16px;} @media(max-width:900px){.two{grid-template-columns:1fr;}}
+.log{font-family:var(--mono);font-size:12.3px;background:var(--navy);color:#CFDBF3;border-radius:12px;padding:12px 14px;height:210px;overflow-y:auto;}
+.log div{padding:2px 0;} .log .ok{color:#5BE0A6;} .log .er{color:#FF8A9B;} .log .wr{color:#FFC978;} .log .tm{color:#6F86AB;}
+.feed{height:210px;overflow-y:auto;}
+.nt{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);animation:pop .35s;}
+.nt:last-child{border:none;} .nt i{font-style:normal;width:30px;height:30px;border-radius:9px;background:var(--sky);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.nt b{font-size:13.2px;display:block;line-height:1.3;} .nt small{color:var(--slate);font-size:11.8px;}
+@keyframes pop{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:none;}}
+.bell{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:13.5px;}
+.bell em{font-style:normal;background:var(--bad);color:#fff;border-radius:99px;font-size:11px;padding:1px 8px;}
+.empty{color:var(--slate);font-size:13.5px;padding:14px 0;text-align:center;}
+
+/* soft delete */
+.rec{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px;}
+.rec:last-child{border:none;} .rec small{display:block;color:var(--slate);font-size:12px;}
+.trash{background:repeating-linear-gradient(135deg,#FAFBFE,#FAFBFE 10px,#F3F6FB 10px,#F3F6FB 20px);}
+
+/* stack */
+.si{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:14px;} .si:last-child{border:none;} .si span{color:var(--slate);font-size:12.8px;text-align:right;}
+.kicker{font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--slate);font-weight:700;margin-bottom:8px;}
+.doc{display:flex;gap:14px;align-items:flex-start;} .doc .big{font-size:34px;font-weight:800;color:var(--blue);line-height:1;letter-spacing:-.03em;min-width:54px;}
+footer{padding:50px 0 60px;text-align:center;color:var(--slate);font-size:13px;}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important;}}
+</style>
+</head>
+<body>
+
+<div class="top"><div class="wrap">
+  <div class="brand">Auto<span>Nidhi</span><small>Lyrcon Solutions · Internship Case Study</small></div>
+  <nav><a href="#overview">Overview</a><a href="#architecture">Architecture</a><a href="#rbac">RBAC</a><a href="#pipeline">Pipeline</a><a href="#softdelete">Safety</a><a href="#stack">Stack</a></nav>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">Software Developer Intern · May – Jun 2026</div>
+  <h1>Building AutoNidhi: a role-secured auto finance platform</h1>
+  <p class="lead">During my internship at Lyrcon Solutions I engineered full-stack features for AutoNidhi — an auto finance and insurance management platform — from role-based access control to a multi-stage approval pipeline and real-time notifications.</p>
+  <div class="meta">
+    <div><small>Company</small><b>Lyrcon Solutions</b></div>
+    <div><small>Role</small><b>Software Developer Intern</b></div>
+    <div><small>Duration</small><b>May – Jun 2026</b></div>
+    <div><small>Project</small><b>AutoNidhi</b></div>
+  </div>
+  <div class="tags"><span class="tag">FastAPI</span><span class="tag">React</span><span class="tag">TypeScript (Vite)</span><span class="tag">Neon PostgreSQL</span><span class="tag">JWT</span></div>
+</div></header>
+
+<!-- 01 -->
+<section id="overview"><div class="wrap">
+  <div class="sh"><div class="num">01 / WHAT I BUILT</div><h2>Four responsibilities, end to end</h2>
+  <p>Each feature was delivered across the stack — database, API, and interface — so it could be used by real people in real roles.</p></div>
+  <div class="grid g4">
+    <div class="card"><div class="ico">🔐</div><h3>Role-based access</h3><p>RBAC across three separate portals — Admin, Accountant and Customer — enforced on the API, not just hidden in the UI.</p></div>
+    <div class="card"><div class="ico">🧭</div><h3>Pipeline workflow</h3><p>A multi-stage pipeline where records move only through permitted, validated state transitions.</p></div>
+    <div class="card"><div class="ico">🗃️</div><h3>Soft-delete safety</h3><p>Deletions are reversible by design, protecting financial records from accidental data loss.</p></div>
+    <div class="card"><div class="ico">🔔</div><h3>Real-time notifications</h3><p>Users are alerted as their records change stage, without refreshing or polling by hand.</p></div>
+  </div>
+</div></section>
+
+<!-- 02 -->
+<section id="architecture"><div class="wrap">
+  <div class="sh"><div class="num">02 / ARCHITECTURE</div><h2>One API, three portals, one source of truth</h2>
+  <p>A Vite + React (TypeScript) front end serves each role its own portal. Every request carries a JWT that the FastAPI backend verifies and checks against the caller’s role before touching Neon PostgreSQL.</p></div>
+  <div class="card diagram">
+  <svg viewBox="0 0 960 400" role="img" aria-label="AutoNidhi architecture">
+    <defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0B1F3A"/></marker><marker id="ab" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1F5FE0"/></marker></defs>
+    <rect class="bx a" x="14" y="24" width="228" height="352" rx="16"/>
+    <text class="t1" x="30" y="52">React + TypeScript (Vite)</text><text class="t2" x="30" y="69">Single-page app</text>
+    <rect class="bx" x="30" y="90" width="196" height="84" rx="12"/><text class="t1" x="44" y="116">Admin portal</text><text class="t2" x="44" y="134">oversight · configuration</text><text class="t2" x="44" y="150">approvals</text>
+    <rect class="bx" x="30" y="188" width="196" height="84" rx="12"/><text class="t1" x="44" y="214">Accountant portal</text><text class="t2" x="44" y="232">verification · payments</text><text class="t2" x="44" y="248">pipeline processing</text>
+    <rect class="bx" x="30" y="286" width="196" height="76" rx="12"/><text class="t1" x="44" y="312">Customer portal</text><text class="t2" x="44" y="330">apply · track status</text><text class="t2" x="44" y="346">notifications</text>
+
+    <rect class="bx n" x="332" y="24" width="300" height="352" rx="16"/>
+    <text class="tw" x="350" y="52">FastAPI backend</text><text class="tw2" x="350" y="69">Python · REST API</text>
+    <rect class="bx" x="352" y="90" width="260" height="56" rx="12"/><text class="t1" x="366" y="114">JWT authentication</text><text class="t2" x="366" y="132">issue · verify · expire tokens</text>
+    <rect class="bx" x="352" y="158" width="260" height="56" rx="12"/><text class="t1" x="366" y="182">RBAC guard</text><text class="t2" x="366" y="200">role checked on every route</text>
+    <rect class="bx" x="352" y="226" width="260" height="56" rx="12"/><text class="t1" x="366" y="250">Pipeline service</text><text class="t2" x="366" y="268">validated state transitions</text>
+    <rect class="bx" x="352" y="294" width="124" height="66" rx="12"/><text class="t1" x="364" y="318">Soft-delete</text><text class="t2" x="364" y="336">reversible</text><text class="t2" x="364" y="350">removal</text>
+    <rect class="bx" x="488" y="294" width="124" height="66" rx="12"/><text class="t1" x="500" y="318">Notifier</text><text class="t2" x="500" y="336">real-time</text><text class="t2" x="500" y="350">alerts</text>
+
+    <rect class="bx g" x="722" y="120" width="224" height="130" rx="16"/>
+    <text class="t1" x="740" y="152">Neon PostgreSQL</text><text class="t2" x="740" y="170">Serverless Postgres</text>
+    <text class="t2" x="740" y="196">users &amp; roles · records</text><text class="t2" x="740" y="212">pipeline stages · audit trail</text>
+    <rect class="bx w" x="722" y="286" width="224" height="74" rx="16"/><text class="t1" x="740" y="316">Live client channel</text><text class="t2" x="740" y="334">pushes stage-change alerts</text>
+
+    <path class="ed" d="M242 132 H332" marker-end="url(#a)"/><text class="t2" x="252" y="123">HTTPS + JWT</text>
+    <path class="ed" d="M632 185 H722" marker-end="url(#a)"/><text class="t2" x="640" y="176">queries</text>
+    <path class="ed b" d="M612 327 H722" marker-end="url(#ab)"/>
+    <path class="ed b" d="M834 360 V378 H140 V362" marker-end="url(#ab)"/><text class="t2" x="380" y="392" fill="#1F5FE0">real-time notifications to the browser</text>
+  </svg>
+  <p class="note">Permission checks live in the backend so a customer cannot reach admin behaviour by editing the front end.</p>
+  </div>
+</div></section>
+
+<!-- 03 -->
+<section id="rbac"><div class="wrap">
+  <div class="sh"><div class="num">03 / ACCESS CONTROL</div><h2>Three roles, three portals, one permission model</h2>
+  <p>Pick a role to highlight what it can do. The same model drives the pipeline demo below.</p></div>
+  <div class="chips" id="roleChips"><button class="chip on" data-r="Admin">Admin</button><button class="chip" data-r="Accountant">Accountant</button><button class="chip" data-r="Customer">Customer</button></div>
+  <div class="grid g2" style="margin-bottom:16px;">
+    <div class="card"><div class="kicker">Portal</div><h3 id="roleTitle"></h3><p id="roleDesc"></p></div>
+    <div class="card"><div class="kicker">Route guard</div><h3>What the API answers</h3>
+      <div class="log" style="height:auto;margin-top:8px;" id="guardLog"></div></div>
+  </div>
+  <div class="tscroll"><table class="m" id="matrix"><thead><tr><th>Capability</th><th class="c" data-col="Admin">Admin</th><th class="c" data-col="Accountant">Accountant</th><th class="c" data-col="Customer">Customer</th></tr></thead><tbody></tbody></table></div>
+  <p class="note">Representative permission model summarising the RBAC design across the three portals.</p>
+</div></section>
+
+<!-- 04 -->
+<section id="pipeline"><div class="wrap">
+  <div class="sh"><div class="num">04 / PIPELINE WORKFLOW</div><h2>Move a record through the pipeline</h2>
+  <p>Every move is a request the server validates: the caller’s role must be allowed to perform that transition, and stages cannot be skipped. Try acting as different roles — and try to break the rules.</p></div>
+  <div class="rolebar"><b>Acting as:</b>
+    <div class="chips" id="pipeChips" style="margin:0;"><button class="chip on" data-r="Admin">Admin</button><button class="chip" data-r="Accountant">Accountant</button><button class="chip" data-r="Customer">Customer</button></div>
+  </div>
+  <div class="card">
+    <div class="flow" id="flow"></div>
+    <div class="acts">
+      <button class="btn" id="advBtn">Advance stage →</button>
+      <button class="btn o" id="skipBtn">Try to skip a stage</button>
+      <button class="btn d" id="rejBtn">Reject application</button>
+      <button class="btn o" id="resetBtn">↺ Reset</button>
+    </div>
+    <div class="two">
+      <div><div class="kicker">Server responses</div><div class="log" id="pipeLog"></div></div>
+      <div><div class="kicker"><span class="bell">🔔 Notifications <em id="bellN">0</em></span></div><div class="feed" id="feed"><div class="empty">No notifications yet — advance the record.</div></div></div>
+    </div>
+    <p class="note">Simulated in your browser with sample data; it mirrors the rules, not a live connection.</p>
+  </div>
+</div></section>
+
+<!-- 05 -->
+<section id="softdelete"><div class="wrap">
+  <div class="sh"><div class="num">05 / DATA SAFETY</div><h2>Deleting without destroying</h2>
+  <p>Financial records are too important for a one-click, unrecoverable delete. Removal flags a record and hides it from normal views; an authorised role can bring it back.</p></div>
+  <div class="rolebar"><b>Acting as:</b>
+    <div class="chips" id="sdChips" style="margin:0;"><button class="chip on" data-r="Admin">Admin</button><button class="chip" data-r="Accountant">Accountant</button><button class="chip" data-r="Customer">Customer</button></div>
+    <span class="note" style="margin:0;" id="sdHint"></span>
+  </div>
+  <div class="grid g2">
+    <div class="card"><div class="kicker">Active records</div><div id="activeList"></div></div>
+    <div class="card trash"><div class="kicker">Soft-deleted (recoverable)</div><div id="trashList"></div></div>
+  </div>
+</div></section>
+
+<!-- 06 -->
+<section id="stack"><div class="wrap">
+  <div class="sh"><div class="num">06 / TECH STACK</div><h2>Tools used</h2></div>
+  <div class="grid g3">
+    <div class="card"><div class="kicker">Backend</div><div class="si"><b>FastAPI</b><span>REST API · validation</span></div><div class="si"><b>JWT</b><span>stateless authentication</span></div><div class="si"><b>Python</b><span>services &amp; business rules</span></div></div>
+    <div class="card"><div class="kicker">Frontend</div><div class="si"><b>React</b><span>component UI</span></div><div class="si"><b>TypeScript</b><span>typed contracts</span></div><div class="si"><b>Vite</b><span>build &amp; dev server</span></div></div>
+    <div class="card"><div class="kicker">Data</div><div class="si"><b>Neon PostgreSQL</b><span>serverless relational store</span></div><div class="si"><b>RBAC</b><span>Admin · Accountant · Customer</span></div></div>
+  </div>
+</div></section>
+
+
+<footer><div class="wrap">Lyrcon Solutions Internship · Interactive demos are simulated with sample data.<br><a href="#overview">Back to top ↑</a></div></footer>
+
+<script>
+/* ===== shared permission model ===== */
+const ROLES={
+ Admin:{portal:'Admin portal',desc:'Full oversight: configure the platform, approve financing decisions, manage users, and restore removed records.'},
+ Accountant:{portal:'Accountant portal',desc:'Day-to-day processing: verify documents, record payments, and move applications through operational stages.'},
+ Customer:{portal:'Customer portal',desc:'Self-service: submit applications, follow their progress and receive notifications — with access limited to their own data.'}
+};
+const CAPS=[
+ ['Manage users & roles',1,0,0],
+ ['Configure platform settings',1,0,0],
+ ['Verify documents & advance processing stages',1,1,0],
+ ['Give final credit approval',1,0,0],
+ ['Record disbursements & payments',1,1,0],
+ ['Soft-delete records',1,1,0],
+ ['Restore soft-deleted records',1,0,0],
+ ['Submit an application',0,0,1],
+ ['View own application status & notifications',1,1,1]
+];
+let curRole='Admin';
+function renderRole(){
+  document.getElementById('roleTitle').textContent=ROLES[curRole].portal;
+  document.getElementById('roleDesc').textContent=ROLES[curRole].desc;
+  const tb=document.querySelector('#matrix tbody');
+  tb.innerHTML=CAPS.map(c=>'<tr><td>'+c[0]+'</td>'+['Admin','Accountant','Customer'].map((r,i)=>'<td class="c'+(r===curRole?' hl':'')+'">'+(c[i+1]?'<span class="y">✓</span>':'<span class="n">—</span>')+'</td>').join('')+'</tr>').join('');
+  document.querySelectorAll('#matrix th[data-col]').forEach(th=>th.classList.toggle('hl',th.dataset.col===curRole));
+  const idx={Admin:1,Accountant:2,Customer:3}[curRole];
+  const probe=[['GET /api/records/own',CAPS[8]],['POST /api/applications',CAPS[7]],['PATCH /api/pipeline/{id}/advance',CAPS[2]],['POST /api/pipeline/{id}/approve',CAPS[3]],['POST /api/admin/users',CAPS[0]]];
+  document.getElementById('guardLog').innerHTML=probe.map(p=>p[1][idx]?'<div><span class="ok">200</span> '+p[0]+'</div>':'<div><span class="er">403</span> '+p[0]+'</div>').join('');
+}
+document.querySelectorAll('#roleChips .chip').forEach(b=>b.addEventListener('click',()=>{
+  curRole=b.dataset.r; document.querySelectorAll('#roleChips .chip').forEach(x=>x.classList.toggle('on',x===b));
+  syncChips(); renderRole();
+}));
+function syncChips(){ ['pipeChips','sdChips'].forEach(id=>document.querySelectorAll('#'+id+' .chip').forEach(x=>x.classList.toggle('on',x.dataset.r===curRole))); document.querySelectorAll('#roleChips .chip').forEach(x=>x.classList.toggle('on',x.dataset.r===curRole)); refreshPipeBtns(); renderSD(); }
+['pipeChips','sdChips'].forEach(id=>document.querySelectorAll('#'+id+' .chip').forEach(b=>b.addEventListener('click',()=>{curRole=b.dataset.r;syncChips();renderRole();})));
+renderRole();
+
+/* ===== pipeline ===== */
+const STAGES=[
+ {id:'submitted',label:'Submitted',by:null},
+ {id:'docs',label:'Document Verification',by:'Accountant'},
+ {id:'credit',label:'Credit Review',by:'Accountant'},
+ {id:'approved',label:'Approved',by:'Admin'},
+ {id:'disbursed',label:'Disbursed',by:'Accountant'},
+ {id:'closed',label:'Closed',by:'Accountant'}
+];
+let cur=0, rejected=false, unread=0;
+const pl=document.getElementById('pipeLog'), feed=document.getElementById('feed');
+function stamp(){return new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'});}
+function log(code,msg){ const cls=code<300?'ok':(code===403||code===409?'er':'wr'); pl.insertAdjacentHTML('afterbegin','<div><span class="tm">'+stamp()+'</span> <span class="'+cls+'">'+code+'</span> '+msg+'</div>'); }
+function notify(icon,title,sub){
+  if(feed.querySelector('.empty')) feed.innerHTML='';
+  feed.insertAdjacentHTML('afterbegin','<div class="nt"><i>'+icon+'</i><div><b>'+title+'</b><small>'+sub+' · '+stamp()+'</small></div></div>');
+  unread++; document.getElementById('bellN').textContent=unread;
+}
+function renderFlow(){
+  document.getElementById('flow').innerHTML=STAGES.map((s,i)=>{
+    let c=''; if(rejected&&i===cur) c='rej'; else if(i<cur) c='done'; else if(i===cur) c='cur';
+    return '<div class="stage '+c+'"><div class="dot">'+(rejected&&i===cur?'✕':(i<cur?'✓':(i+1)))+'</div><span>'+s.label+'</span><small>'+(i===0?'entry':'needs '+s.by)+'</small></div>';
+  }).join('');
+  refreshPipeBtns();
+}
+function refreshPipeBtns(){
+  const end=rejected||cur===STAGES.length-1;
+  ['advBtn','skipBtn','rejBtn'].forEach(id=>{const b=document.getElementById(id); if(b) b.disabled=end;});
+  const a=document.getElementById('advBtn'); if(a&&!end) a.textContent='Advance to '+STAGES[cur+1].label+' →';
+}
+document.getElementById('advBtn').addEventListener('click',()=>{
+  const next=STAGES[cur+1];
+  if(curRole!==next.by){ log(403,'Forbidden — moving to “'+next.label+'” requires <b>'+next.by+'</b> (you are '+curRole+')'); return; }
+  cur++; log(200,'PATCH /pipeline/AN-1042 → <b>'+next.label+'</b> by '+curRole);
+  notify('📨','Application moved to '+next.label,'Customer notified');
+  if(next.id==='approved') notify('✅','Financing approved','Accountant queue updated');
+  renderFlow();
+});
+document.getElementById('skipBtn').addEventListener('click',()=>{
+  const tgt=STAGES[Math.min(cur+2,STAGES.length-1)];
+  log(409,'Conflict — cannot jump from “'+STAGES[cur].label+'” to “'+tgt.label+'”; stages must be completed in order');
+});
+document.getElementById('rejBtn').addEventListener('click',()=>{
+  if(curRole!=='Admin'){ log(403,'Forbidden — rejecting an application requires <b>Admin</b> (you are '+curRole+')'); return; }
+  rejected=true; log(200,'PATCH /pipeline/AN-1042 → <b>Rejected</b> by Admin'); notify('⛔','Application rejected','Customer notified'); renderFlow();
+});
+document.getElementById('resetBtn').addEventListener('click',()=>{ cur=0; rejected=false; unread=0; document.getElementById('bellN').textContent=0; pl.innerHTML=''; feed.innerHTML='<div class="empty">No notifications yet — advance the record.</div>'; renderFlow(); });
+renderFlow();
+log(200,'GET /pipeline/AN-1042 → Submitted');
+
+/* ===== soft delete ===== */
+let recs=[
+ {id:'AN-1042',name:'Finance application #AN-1042',sub:'Sample record',del:false},
+ {id:'CU-207',name:'Customer profile — Sample User A',sub:'Sample record',del:false},
+ {id:'PO-311',name:'Insurance policy #PO-311',sub:'Sample record',del:false}
+];
+function renderSD(){
+  const canDel=curRole!=='Customer', canRes=curRole==='Admin';
+  document.getElementById('sdHint').textContent=curRole==='Customer'?'Customers cannot delete or restore records.':(canRes?'Admins can delete and restore.':'Accountants can delete, but only Admins can restore.');
+  const act=recs.filter(r=>!r.del), tr=recs.filter(r=>r.del);
+  document.getElementById('activeList').innerHTML=act.length?act.map(r=>'<div class="rec"><div>'+r.name+'<small>'+r.sub+'</small></div><button class="btn d" data-del="'+r.id+'" '+(canDel?'':'disabled')+'>Delete</button></div>').join(''):'<div class="empty">No active records.</div>';
+  document.getElementById('trashList').innerHTML=tr.length?tr.map(r=>'<div class="rec"><div>'+r.name+'<small><span class="pill warn">flagged deleted</span> still stored — recoverable</small></div><button class="btn o" data-res="'+r.id+'" '+(canRes?'':'disabled')+'>Restore</button></div>').join(''):'<div class="empty">Trash is empty.</div>';
+  document.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{recs.find(r=>r.id===b.dataset.del).del=true;renderSD();});
+  document.querySelectorAll('[data-res]').forEach(b=>b.onclick=()=>{recs.find(r=>r.id===b.dataset.res).del=false;renderSD();});
+}
+renderSD();
+</script>
+</body>
+</html>

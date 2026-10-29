@@ -23,15 +23,23 @@ export default function About() {
           {/* Left Column: The Narrative */}
           <div className="space-y-6 text-lg text-foreground/80 dark:text-foreground/70 leading-relaxed">
             <p>
-              I am a Computer Science student at Charusat University with a deep 
-              passion for bridging the gap between beautiful, minimalist aesthetics 
-              and robust backend architectures.
+              I&apos;m a Computer Science student at Charusat University, currently in my
+              third year. I like working on the full stack — the UI side and the backend
+              side equally — and I tend to reach for Next.js, FastAPI, and TypeScript for
+              most of what I build.
             </p>
             <p>
-              My technical journey is driven by curiosity. Whether I am architecting 
-              full-stack applications with Next.js and TypeScript, diving deep into 
-              complex C++ algorithms, or participating in the Google Gemini Student Community, 
-              I love building things that are as secure as they are visually stunning.
+              So far I&apos;ve shipped a multi-agent data-analysis platform (DataMind), an
+              AI-powered code-review tool (ByteBack), a Microsoft Edge extension for
+              auto-generating TypeScript interfaces, and a few team projects like an
+              academic portal and an AI student-evaluation system.
+            </p>
+            <p>
+              I interned at Lyrcon Solutions earlier this year, building role-based access
+              control and a real-time notification system for an auto finance platform. On
+              the hackathon side, my team of three competed in the Odoo Hackathon — we
+              built AssetFlow in the virtual qualifier round, made it through, then built
+              DealFlow360 in the finals.
             </p>
           </div>
 
